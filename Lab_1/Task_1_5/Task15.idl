@@ -1,0 +1,18 @@
+// Task_1_5.idl : IDL source for Task_1_5
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (Task15.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(bb580ac9-afb2-4c1a-b6f1-cc22faaf6f0e),
+	version(1.0),
+]
+library Task15Lib
+{
+	importlib("stdole2.tlb");
+};
+
