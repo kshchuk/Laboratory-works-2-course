@@ -37,7 +37,7 @@ protected:
 public:
 	void Add(T data);
 
-	// Clears tree nodes exept root
+	// Clears tree nodes except root
 	void Clear(Node* root = nullptr);
 
 };
