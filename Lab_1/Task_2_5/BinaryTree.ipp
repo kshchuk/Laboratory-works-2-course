@@ -30,17 +30,17 @@ template<typename T>
 inline void BinaryTree<T>::Clear(Node* node)
 {
 	if (node == nullptr)
-		node == root;
+		node = root;
 
 	if (node->left != nullptr)
 	{
-		clear(node->left);
+		Clear(node->left);
 		delete node->left;
 		node->left = nullptr;
 	}
 	if (node->right != nullptr)
 	{
-		clear(node->right);
+		Clear(node->right);
 		delete node->right;
 		node->right = nullptr;
 	}

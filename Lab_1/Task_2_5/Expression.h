@@ -47,5 +47,3 @@ private:
 	void dMult(std::string var, Node*& mult_node);
 	void dDiv(std::string var, Node*& div_node);
 };
-
-#include "Expression.ipp"

@@ -14,7 +14,9 @@ protected:
 		Node* left, *right;
 
 		Node() : left(nullptr), right(nullptr) {}
-		Node(T data) : Node(), data(data) {}
+		Node(T data) : data(data) {
+			Node();
+		}
 	};
 
 	Node* root;
@@ -26,10 +28,10 @@ protected:
 		if (!node)
 			return nullptr;
 
-		Node* new_node = new Node(node->data));
+		Node* new_node = new Node(node->data);
 
-		new_node->left = copy(node->left);
-		new_node->right = copy(node->right);
+		new_node->left = Copy(node->left);
+		new_node->right = Copy(node->right);
 
 		return new_node;
 	} // Copies all elements of tree
