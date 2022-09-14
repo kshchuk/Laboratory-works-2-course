@@ -1,5 +1,7 @@
-#include <string>
+#include "pch.h"
 #include "Expression.h"
+
+#include <string>
 
 
 Expression::Expression(std::string expression) : BinaryTree()
@@ -17,7 +19,7 @@ Expression::Expression(std::string expression) : BinaryTree()
     GenSubTree(&this->root, start);
 }
 
-inline void Expression::ProcessOperation(std::string function, std::stack<std::string>& operators, std::vector<std::string>& rpn)
+void Expression::ProcessOperation(std::string function, std::stack<std::string>& operators, std::vector<std::string>& rpn)
 {
     int cur_function_priority = this->kFunctionsPriorities.at(function);
     while (!operators.empty())
@@ -33,7 +35,7 @@ inline void Expression::ProcessOperation(std::string function, std::stack<std::s
     operators.push(function);
 }
 
-inline std::vector<std::string> Expression::GenRpn(std::string expression)
+std::vector<std::string> Expression::GenRpn(std::string expression)
 {
     std::stack <std::string> operations;
     std::vector<std::string> rpn;
@@ -116,7 +118,7 @@ inline std::vector<std::string> Expression::GenRpn(std::string expression)
     return rpn;
 }
 
-inline bool Expression::isNumber(std::string str)
+bool Expression::isNumber(std::string str)
 {
     for (auto i : str) {
         char end = *(str.end() - 1);
@@ -126,23 +128,23 @@ inline bool Expression::isNumber(std::string str)
     return true;
 }
 
-inline void Expression::CheckVar(std::string var)
+void Expression::CheckVar(std::string var)
 {
     if (std::find(vars.begin(), vars.end(), var) == vars.end())
         vars.push_back(var);
 }
 
-inline bool Expression::isFunction(std::string str) {
+bool Expression::isFunction(std::string str) {
     return kFunctionsPriorities.count(str) != 0;
 }
 
-inline bool Expression::isUnaryFunction(std::string str) {
+bool Expression::isUnaryFunction(std::string str) {
     if (!isFunction(str))
         return false;
     return kFunctionsPriorities.at(str) == 1;
 }
 
-inline void Expression::GenSubTree(Node** node, std::vector<std::string>::iterator& cur)
+void Expression::GenSubTree(Node** node, std::vector<std::string>::iterator& cur)
 {
     if (isFunction(*cur))
     {
@@ -159,7 +161,7 @@ inline void Expression::GenSubTree(Node** node, std::vector<std::string>::iterat
     }
 }
 
-inline bool Expression::Compare(Node* node_1, Node* node_2)
+bool Expression::Compare(Node* node_1, Node* node_2)
 {
     if (!node_1 && !node_2)
         return true;
@@ -168,7 +170,7 @@ inline bool Expression::Compare(Node* node_1, Node* node_2)
     else
         if (node_1->data == node_2->data ||
             isNumber(node_1->data) && isNumber(node_2->data) &&
-            std::stod(node_1->data) == std::stod(node_2->data)) 
+            std::stod(node_1->data) == std::stod(node_2->data))
         {
             if (node_1->data == "+" || node_1->data == "*")
                 return (Compare(node_1->left, node_2->left) && Compare(node_1->right, node_2->right) ||
@@ -184,7 +186,7 @@ inline bool Expression::Compare(Node* node_1, Node* node_2)
             return false;
 }
 
-inline void Expression::dCos(std::string var, Node*& cos_node)
+void Expression::dCos(std::string var, Node*& cos_node)
 {
     Node* mult = new Node(std::string("*"));
 
@@ -198,7 +200,7 @@ inline void Expression::dCos(std::string var, Node*& cos_node)
     *cos_node = *mult;
 }
 
-inline void Expression::dSin(std::string var, Node*& sin_node)
+void Expression::dSin(std::string var, Node*& sin_node)
 {
     Node* mult = new Node(std::string("*"));
     Node* dSin = new Node(std::string("cos"));
@@ -209,7 +211,7 @@ inline void Expression::dSin(std::string var, Node*& sin_node)
     *sin_node = *mult;
 }
 
-inline void Expression::dLog(std::string var, Node*& log_node)
+void Expression::dLog(std::string var, Node*& log_node)
 {
     Node* mult = new Node(std::string("*"));
 
@@ -228,7 +230,7 @@ inline void Expression::dLog(std::string var, Node*& log_node)
     *log_node = *mult;
 }
 
-inline void Expression::dPow(std::string var, Node*& pow_node)
+void Expression::dPow(std::string var, Node*& pow_node)
 {
     Node* mult = new Node(std::string("*"));
 
@@ -248,7 +250,7 @@ inline void Expression::dPow(std::string var, Node*& pow_node)
     *pow_node = *mult;
 }
 
-inline void Expression::dLn(std::string var, Node*& ln_node)
+void Expression::dLn(std::string var, Node*& ln_node)
 {
     Node* mult = new Node(std::string("*"));
 
@@ -261,7 +263,7 @@ inline void Expression::dLn(std::string var, Node*& ln_node)
     *ln_node = *mult;
 }
 
-inline void Expression::dTg(std::string var, Node*& tg_node)
+void Expression::dTg(std::string var, Node*& tg_node)
 {
     Node* mult = new Node(std::string("*"));
 
@@ -279,13 +281,13 @@ inline void Expression::dTg(std::string var, Node*& tg_node)
     *tg_node = *mult;
 }
 
-inline void Expression::PrintVarList()
+void Expression::PrintVarList()
 {
     for (auto var : vars)
         std::cout << var << ", ";
 }
 
-inline Expression::Node* Expression::Differentiate(std::string var, Node* node)
+Expression::Node* Expression::Differentiate(std::string var, Node* node)
 {
     if (node == nullptr)
         node = root;
@@ -323,7 +325,7 @@ inline Expression::Node* Expression::Differentiate(std::string var, Node* node)
     return node;
 }
 
-inline void Expression::dDiv(std::string var, Node*& div_node)
+void Expression::dDiv(std::string var, Node*& div_node)
 {
     Node* div = new Node(std::string("/"));
 
@@ -343,7 +345,7 @@ inline void Expression::dDiv(std::string var, Node*& div_node)
     *div_node = *div;
 }
 
-inline void Expression::dMult(std::string var, Node*& mult_node)
+void Expression::dMult(std::string var, Node*& mult_node)
 {
     Node* sum = new Node(std::string("+"));
 
@@ -360,7 +362,7 @@ inline void Expression::dMult(std::string var, Node*& mult_node)
     *mult_node = *sum;
 }
 
-inline double Expression::CalculateFunction(std::string function, double arg_1, double arg_2)
+double Expression::CalculateFunction(std::string function, double arg_1, double arg_2)
 {
     if (function == "+")
         return arg_1 + arg_2;
@@ -369,14 +371,14 @@ inline double Expression::CalculateFunction(std::string function, double arg_1, 
     else if (function == "*")
         return arg_1 * arg_2;
     else if (function == "/") {
-        if (arg_2 == 0) 
+        if (arg_2 == 0)
             throw std::overflow_error("Math error: Dividing by Zero");
         return arg_1 / arg_2;
     }
     else if (function == "^")
         return pow(arg_1, arg_2);
     else if (function == "ln") {
-        if (arg_1 <= 0) 
+        if (arg_1 <= 0)
             throw std::overflow_error("Math error: Wrong function argument 'ln(a)', 'a' is less than or equal to Zorro\n");
 
         return log(arg_1);
@@ -398,7 +400,7 @@ inline double Expression::CalculateFunction(std::string function, double arg_1, 
     else return arg_1;
 }
 
-inline void Expression::Simplify(Node* node, Node* parent)
+void Expression::Simplify(Node* node, Node* parent)
 {
     if (node == nullptr)
         node = root;
@@ -419,7 +421,7 @@ inline void Expression::Simplify(Node* node, Node* parent)
     }
 }
 
-inline void Expression::SimplifyBinaryFunction(Node* node, Node* parent)
+void Expression::SimplifyBinaryFunction(Node* node, Node* parent)
 {
     if (!isNumber(node->right->data)) {
         Simplify(node->right, node);
@@ -429,8 +431,8 @@ inline void Expression::SimplifyBinaryFunction(Node* node, Node* parent)
     }
     if (isNumber(node->right->data) && isNumber(node->left->data))
     {
-        node->data = std::to_string(CalculateFunction(node->data, 
-                std::stod(node->left->data), std::stod(node->right->data)));
+        node->data = std::to_string(CalculateFunction(node->data,
+            std::stod(node->left->data), std::stod(node->right->data)));
         Clear(node);
     }
     else {
@@ -467,9 +469,9 @@ inline void Expression::SimplifyBinaryFunction(Node* node, Node* parent)
             else
                 if (node->data == "/")
                     throw std::overflow_error("Math error: Dividing by Zero/n");
-                else 
-                if (node->data == "log")
-                    throw std::overflow_error("Math error: Wrong function argument 'log(a, b)', 'b' is equal to Zero\n");
+                else
+                    if (node->data == "log")
+                        throw std::overflow_error("Math error: Wrong function argument 'log(a, b)', 'b' is equal to Zero\n");
         }
         else if (isNumber(node->left->data) && std::stod(node->left->data) == 1)
         {
@@ -513,7 +515,7 @@ inline void Expression::SimplifyBinaryFunction(Node* node, Node* parent)
     }
 }
 
-inline void Expression::SimplifyUnaryFunction(Node* node, Node* parent)
+void Expression::SimplifyUnaryFunction(Node* node, Node* parent)
 {
     if (!isNumber(node->right->data)) {
         Simplify(node->right, node);
@@ -528,7 +530,7 @@ Expression::Expression(Node* exp) {
     this->root = exp;
 }
 
-inline void Expression::ConvertVarsToNumbers(std::map<std::string, double> values, Node* node)
+void Expression::ConvertVarsToNumbers(std::map<std::string, double> values, Node* node)
 {
     if (!node)
         return;
@@ -540,7 +542,7 @@ inline void Expression::ConvertVarsToNumbers(std::map<std::string, double> value
     ConvertVarsToNumbers(values, node->right);
 }
 
-inline double Expression::CalculateExpression(std::map<std::string, double> variables_values)
+double Expression::CalculateExpression(std::map<std::string, double> variables_values)
 {
     Expression* temp = new Expression(Copy(this->root));
     ConvertVarsToNumbers(variables_values, temp->root);
