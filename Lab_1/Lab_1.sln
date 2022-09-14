@@ -18,7 +18,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Task_1_5PS", "Task_1_5PS\Ta
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tester", "tester\tester.vcxproj", "{FE1D859D-D55D-4A8F-AF92-0AED4F7BE2C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tester_s", "tester_s\tester_s.csproj", "{01412A1E-BF0D-42A6-BAFA-4A6DC9848198}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tester_s", "tester_s\tester_s.csproj", "{01412A1E-BF0D-42A6-BAFA-4A6DC9848198}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
