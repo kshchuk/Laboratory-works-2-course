@@ -30,6 +30,9 @@
     <ClInclude Include="Expression.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Expression.ipp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
