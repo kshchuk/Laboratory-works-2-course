@@ -11,7 +11,7 @@ namespace Task_1_3
         public T data;
         public Node<T>? next, prev;
 
-        Node(T data)
+        public Node(T data)
         {
             this.data = data;
             this.next = null;
