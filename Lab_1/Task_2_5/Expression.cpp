@@ -456,7 +456,7 @@ namespace expr
             Clear(node);
         }
         else {
-            // Check all combinations to find exceptions and simplify expression
+            // Check all possible combinations to simplify expression
 
             if (isNumber(node->left->data) && std::stod(node->left->data) == 0)
             {
@@ -468,9 +468,6 @@ namespace expr
                     Clear(node);
                     node->data = std::string("0");
                 }
-                else
-                    if (node->data == "tg")
-                        throw std::overflow_error("Math error: Wrong function argument 'tg(a)', 'a' is equal to Zero\n");
             }
             else if (isNumber(node->right->data) && std::stod(node->right->data) == 0)
             {
@@ -486,12 +483,6 @@ namespace expr
                     Clear(node);
                     node->data = std::string("1");
                 }
-                else
-                    if (node->data == "/")
-                        throw std::overflow_error("Math error: Dividing by Zero/n");
-                    else
-                        if (node->data == "log")
-                            throw std::overflow_error("Math error: Wrong function argument 'log(a, b)', 'b' is equal to Zero\n");
             }
             else if (isNumber(node->left->data) && std::stod(node->left->data) == 1)
             {
@@ -503,9 +494,6 @@ namespace expr
                     Clear(node);
                     node->data = std::string("1");
                 }
-                else
-                    if (node->data == "log")
-                        throw std::overflow_error("Math error: Wrong function argument 'log(a, b)', 'a' is equal to One\n");
             }
             else if (isNumber(node->right->data) && std::stod(node->right->data) == 1)
             {
@@ -518,15 +506,8 @@ namespace expr
                     node->data = std::string("0");
                 }
             }
-            //else if (isNumber(node->left->data)) {
-            //    if (std::stod(node->left->data) < 0)
-            //        throw std::overflow_error("Math error: Wrong function argument 'log(a, b)', 'a' is less than Zero\n");
-            //}
-            //else if (isNumber(node->right->data)) {
-            //    if (std::stod(node->right->data) < 0)
-            //        throw std::overflow_error("Math error: Wrong function argument 'log(a, b)', 'b' is less than Zero\n");
-            //}
-            else if (!isNumber(node->left->data) && !isNumber(node->right->data) && node->data == "-") {
+            else
+                if (!isNumber(node->left->data) && !isNumber(node->right->data) && node->data == "-") {
                 if (Compare(node->left, node->right)) {
                     Clear(node);
                     node->data = std::string("0");
