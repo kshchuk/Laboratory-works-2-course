@@ -27,6 +27,7 @@ namespace expr
 		Node* Differentiate(std::string var, Node* node = nullptr);
 		double CalculateExpression(std::map<std::string, double> values_of_variables = 
 			std::map<std::string, double>());
+		std::string to_string(Node* node = nullptr);
 
 	private:
 		Expression(Node*);

@@ -33,7 +33,25 @@ namespace expr
         this->root = expr;
     }
 
-    void Expression::ProcessOperation(std::string function, std::stack<std::string>& operators, std::vector<std::string>& rpn)
+    std::string Expression::to_string(Node* node)
+    {
+        if (root == nullptr)
+            return std::string("");
+        if (node == nullptr)
+            node = root;
+
+        if (isFunction(node->data)) {
+            if (isUnaryFunction(node->data))
+                return (node->data + '(' + to_string(node->right) + ')');
+            else
+                return ('(' + to_string(node->left) + ')' + node->data + '(' + to_string(node->right) + ')');
+        }
+        else
+            return node->data;
+    }
+
+    void Expression::ProcessOperation(std::string function, 
+        std::stack<std::string>& operators, std::vector<std::string>& rpn)
     {
         int cur_function_priority = this->kFunctionsPriorities.at(function);
         while (!operators.empty())
@@ -508,14 +526,14 @@ namespace expr
             }
             else
                 if (!isNumber(node->left->data) && !isNumber(node->right->data) && node->data == "-") {
-                if (Compare(node->left, node->right)) {
-                    Clear(node);
-                    node->data = std::string("0");
+                    if (Compare(node->left, node->right)) {
+                        Clear(node);
+                        node->data = std::string("0");
+                    }
                 }
-            }
         }
     }
-
+    
     void Expression::SimplifyUnaryFunction(Node* node, Node* parent)
     {
         if (!isNumber(node->right->data)) {
