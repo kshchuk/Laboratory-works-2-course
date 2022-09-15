@@ -2,27 +2,27 @@
 
 namespace expr
 {
-	template<typename T>
-	inline void BinaryTree<T>::Print(Node* node)
-	{
-		if (root == nullptr)
-			return;
-		if (node == nullptr)
-			node = root;
+	//template<typename T>
+	//inline void BinaryTree<T>::Print(Node* node)
+	//{
+	//	if (root == nullptr)
+	//		return;
+	//	if (node == nullptr)
+	//		node = root;
 
-		if (node) {
-			std::cout << node->data << ' ';
+	//	if (node) {
+	//		std::cout << node->data << ' ';
 
-			if (node->left == nullptr && node->right == nullptr)
-				return;
-			std::cout << "(";
-			if (node->left != nullptr)
-				Print(node->left);
-			if (node->right != nullptr)
-				Print(node->right);
-			std::cout << ")";
-		}
-	}
+	//		if (node->left == nullptr && node->right == nullptr)
+	//			return;
+	//		std::cout << "(";
+	//		if (node->left != nullptr)
+	//			Print(node->left);
+	//		if (node->right != nullptr)
+	//			Print(node->right);
+	//		std::cout << ")";
+	//	}
+	//}
 
 	template<typename T>
 	inline void BinaryTree<T>::Clear(Node* node)

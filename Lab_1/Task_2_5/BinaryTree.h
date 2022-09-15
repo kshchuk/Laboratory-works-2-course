@@ -38,7 +38,7 @@ namespace expr
 
 	public:
 		// Brackets representation
-		void Print(Node* node = nullptr);
+		//void Print(Node* node = nullptr);
 
 		// Clears tree nodes except root
 		void Clear(Node* root = nullptr);
