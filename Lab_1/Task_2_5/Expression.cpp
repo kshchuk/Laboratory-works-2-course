@@ -360,6 +360,7 @@ namespace expr
                 Differentiate(var, node->right);
             }
         }
+        this->Simplify(node);
         return node;
     }
 
