@@ -1,13 +1,48 @@
 #include <iostream>
 
+#include <Windows.h>
+
 #include <Expression.h>
 
+void ImplicitCallingTest()
+{
+	expr::Expression* ex = new expr::Expression();
+	ex->LoadExpression("x+15*y-10/(100*54^x/ln(10000))");
+	std::cout << ex->to_string() << std::endl;
+	ex->Simplify();
+	std::map<std::string, double> values = { {"x", 4}, {"y", 18} };
+	std::cout << ex->CalculateExpression(values) << std::endl;
+	std::cout << ex->to_string();
+}
+
+typedef expr::Expression* (__cdecl* ExpressionFactory)();
+
+void ExplicitCallingTest()
+{
+	HMODULE dll = LoadLibrary(L"Task_2_5.dll");
+	if (!dll)
+	{
+		std::cout << "Fail load library" << std::endl;
+		return;
+	}
+	ExpressionFactory factory = reinterpret_cast<ExpressionFactory>(GetProcAddress(dll, "CreateExpression"));
+
+	if (!factory) {
+		std::cerr << "Unable to load CreateLogarithmicMath from DLL!\n";
+		FreeLibrary(dll);
+		return;
+	}
+	expr::Expression* instance = factory();
+	instance->LoadExpression("x+15*y-10/(100*54^x/ln(10000))");
+	std::map<std::string, double> values = { {"x", 4}, {"y", 18} };
+	std::cout << std::endl << instance->CalculateExpression(values);
+
+	delete instance;
+	FreeLibrary(dll);
+}
 
 int main()
 {
-	expr::Expression* ex = new expr::Expression("tg(10)^15*y*x+35*sin(-3.14)/x");
-	ex->Print();
-	ex->Simplify();
-	std::cout << std::endl;
-	ex->Print();
+	ImplicitCallingTest();
+	ExplicitCallingTest();
 }
