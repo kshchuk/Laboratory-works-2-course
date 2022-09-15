@@ -29,6 +29,8 @@ namespace expr
 	{
 		if (node == nullptr)
 			node = root;
+		if (root == nullptr)
+			return;
 
 		if (node->left != nullptr)
 		{
