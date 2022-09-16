@@ -28,7 +28,10 @@ namespace Task_1_3
         }
 
         public MyLinkedList<T> List => list;
-        public Node<T> Next => next == null || next == list.head ? null : next;
+        public Node<T> Next {
+            get { return next; }
+            set { next = value; }
+        }
         public T Value
         {
             get { return item; }
