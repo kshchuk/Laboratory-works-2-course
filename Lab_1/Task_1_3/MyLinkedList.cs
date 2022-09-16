@@ -27,16 +27,12 @@ namespace Task_1_3
         public void Add(T item)
         {
             if (head == null)
-            {
                 head = new Node<T>(item);
-                return;
-            }
             else
             {
-                Node<T> node = head;
-                while (node.Next != null) node = node.Next;
-
-                node.Next = new Node<T>(item);
+                Node<T> current = head;
+                while (current.Next != null) current = current.Next;
+                current.Next = new Node<T>(item);
             }
             Count++;
         }
@@ -78,13 +74,11 @@ namespace Task_1_3
         public bool Contains(T item)
         {
             Node<T> current = head;
-            if (current != null)
+            while (current != null)
             {
-                while (current.Next != null)
-                {
-                    if (current.Next.Equals(item))
-                        return true;
-                }
+                if (current.Value.Equals(item))
+                    return true;
+                current = current.Next;
             }
             return false;                       
         }
@@ -124,21 +118,20 @@ namespace Task_1_3
                 head = new Node<T>(item);
             else
             {
-                Node<T> node = new Node<T>(item);
                 Node<T> current = head;
                 while (current.Next != null) current = current.Next;
-                current.Next = node;
+                current.Next = new Node<T>(item);
             }
             Count++;
         }
-        public void AddBefore(T item)
+        public void AddBefore(T newItem, T item)
         {
             if (head == null)
                 throw new ArgumentException("Item does not exist in the list");
             else 
             if (head.Value.Equals(item))
             {
-                AddFirst(item);
+                AddFirst(newItem);
             }
             else
             {
@@ -147,18 +140,19 @@ namespace Task_1_3
                 {
                     if (current.Next.Value.Equals(item))
                     {
-                        Node<T> node = new Node<T>(item);
+                        Node<T> node = new Node<T>(newItem);
                         node.Next = current.Next;
                         current.Next = node;
                         Count++;
                         return;
                     }
+                    current = current.Next;
                 }
                 // Item did not find
                 throw new ArgumentException("Item does not exist in the list");
             }
         }
-        public void AddAfter(T item)
+        public void AddAfter(T newItem, T item)
         {
             if (head == null)
                 throw new ArgumentException("Item does not exist in the list");
@@ -169,12 +163,13 @@ namespace Task_1_3
                 {
                     if (current.Value.Equals(item))
                     {
-                        Node<T> node = new Node<T>(item);
+                        Node<T> node = new Node<T>(newItem);
                         node.Next = current.Next;
                         current.Next = node;
                         Count++;
                         return;
                     }
+                    current = current.Next;
                 }
                 // Item did not find
                 throw new ArgumentException("Item does not exist in the list");
