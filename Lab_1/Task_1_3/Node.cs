@@ -6,27 +6,43 @@ using System.Threading.Tasks;
 
 namespace Task_1_3
 {
-    internal sealed class Node<T>
+    /// <summary>
+    /// Node for Single Linked List
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public sealed class LinkedListNode<T>
     {
-        public T Data { get; set; }
-        public Node<T> next, prev;
+        internal MyLinkedList<T> list;
+        internal LinkedListNode<T> next;
+        internal LinkedListNode<T> prev;
+        internal T item;
 
-        public Node(T data)
+        public LinkedListNode(T value)
         {
-            this.Data = data;
-            this.next = null;
-            this.prev = null;
+            this.item = value;
+        }
+        internal LinkedListNode(MyLinkedList<T> list, T value)
+        {
+            this.list = list;
+            this.item = value;
         }
 
-        public static Node<T> operator ++(Node<T> node)
+        public MyLinkedList<T> List => list;
+        public LinkedListNode<T> Next => next == null || next == list.head ? null : next;
+        public T Value
         {
-            node = node.next;
-            return node;
+            get { return item; }
+            set { item = value; }
         }
-        public static Node<T> operator --(Node<T> node)
+
+        /// <summary>
+        /// Destructor
+        /// </summary>
+        internal void Invalidate()
         {
-            node = node.prev;
-            return node;
+            list = null;
+            next = null;
+            prev = null;
         }
     }
 }
