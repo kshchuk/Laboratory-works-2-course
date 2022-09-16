@@ -12,22 +12,15 @@ namespace Task_1_3
     /// <typeparam name="T"></typeparam>
     public sealed class Node<T>
     {
-        internal MyLinkedList<T> list;
-        internal Node<T> next;
-        internal T item;
+        private Node<T> next;
+        private T item;
 
         public Node(T value)
         {
             this.item = value;
         }
-        internal Node(MyLinkedList<T> list, T value)
-        {
-            this.list = list;
-            this.item = value;
-        }
 
-        public MyLinkedList<T> List => list;
-        public Node<T> Next {
+        internal Node<T> Next {
             get { return next; }
             set { next = value; }
         }
