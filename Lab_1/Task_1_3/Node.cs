@@ -10,7 +10,7 @@ namespace Task_1_3
     /// Node for Single Linked List
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public sealed class Node<T>
+    public class Node<T>
     {
         private Node<T> next;
         private T item;
@@ -35,9 +35,7 @@ namespace Task_1_3
         /// </summary>
         internal void Invalidate()
         {
-            list = null;
             next = null;
-            prev = null;
         }
     }
 }
