@@ -14,7 +14,6 @@ namespace Task_1_3
     {
         internal MyLinkedList<T> list;
         internal Node<T> next;
-        internal Node<T> prev;
         internal T item;
 
         public Node(T value)
