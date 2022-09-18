@@ -14,7 +14,7 @@ namespace Task_1_3
         /// <returns></returns>
         bool isEmpty();
         /// <summary>
-        /// Adds a new element to the rear end of the queue
+        /// Adds a new element to the end of the queue
         /// </summary>
         /// <param name="item"> Element to add</param>
         void Enqueue(T item);
