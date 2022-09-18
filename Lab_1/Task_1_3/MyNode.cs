@@ -6,21 +6,9 @@ using System.Threading.Tasks;
 
 namespace Task_1_3
 {
-    /// <summary>
-    /// Base class for all nodes
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public abstract class MyNode<T>
+    interface MyNode<T>
     {
-        protected MyNode<T> next;
-        protected T item;
-
-        public MyNode(T value)
-        {
-            this.item = value;
-        }
-
-        public abstract T Value { get; set; }
+        T Value { get; set; }
 
         /// <summary>
         /// Destructor

@@ -14,9 +14,11 @@ namespace Task_1_3
     {
         private DNode<T> next;
         private DNode<T> prev;
+        private T value;
 
-        public DNode(T value) : base(value)
+        public DNode(T value)
         {
+            this.value = value;
             next = null;
             prev = null;
         }
@@ -31,13 +33,13 @@ namespace Task_1_3
             get { return prev; }
             set { prev = value; }
         }
-        public override T Value
+        public T Value
         {
-            get { return item; }
-            set { item = value; }
+            get { return value; }
+            set { this.value = value; }
         }
 
-        public override void Invalidate()
+        public void Invalidate()
         {
             next = null;
             prev = null;

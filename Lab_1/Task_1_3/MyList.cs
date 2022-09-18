@@ -6,16 +6,11 @@ using System.Threading.Tasks;
 
 namespace Task_1_3
 {
-    /// <summary>
-    /// Base for all lists
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public abstract class MyList<T>
+    interface MyList<T>
     {
-        protected MyNode<T> head;
-        public abstract void AddFirst(T item);
-        public abstract void AddLast(T item);
-        public abstract void AddBefore(T newItem, T item);
-        public abstract void AddAfter(T newItem, T item);
+        void AddFirst(T item);
+        void AddLast(T item);
+        void AddBefore(T newItem, T item);
+        void AddAfter(T newItem, T item);
     }
 }

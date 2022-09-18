@@ -13,10 +13,11 @@ namespace Task_1_3
     public class SNode<T> : MyNode<T>
     {
         private SNode<T> next;
+        private T value;
 
         public SNode(T value)
-            : base(value) 
         {
+            this.value = value;
             next = null;
         }
         public SNode<T> Next
@@ -24,12 +25,12 @@ namespace Task_1_3
             get { return next; }
             set { next = value; }
         }
-        public override T Value
+        public T Value
         {
-            get { return item; }
-            set { item = value; }
+            get { return value; }
+            set { this.value = value; }
         }
-        public override void Invalidate()
+        public void Invalidate()
         {
             next = null;
         }
