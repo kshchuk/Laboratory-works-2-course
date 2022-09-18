@@ -16,7 +16,7 @@ namespace Task_1_3
         /// Checks whether there is no elemets in the stack
         /// </summary>
         /// <returns></returns>
-        bool isEmppy();
+        bool isEmpty();
         /// <summary>
         /// Inserts an object as the top element of the stack
         /// </summary>
