@@ -4,7 +4,7 @@
 
 #include <Expression.h>
 
-void ImplicitCallingTest()
+void ImplicitCallTest()
 {
 	expr::Expression* ex = new expr::Expression();
 	ex->LoadExpression("x+15*y-10/(100*54^x/ln(10000))");
@@ -17,7 +17,7 @@ void ImplicitCallingTest()
 
 typedef expr::Expression* (__cdecl* ExpressionFactory)();
 
-void ExplicitCallingTest()
+void ExplicitCallTest()
 {
 	HMODULE dll = LoadLibrary(L"Task_2_5.dll");
 	if (!dll)
@@ -43,6 +43,6 @@ void ExplicitCallingTest()
 
 int main()
 {
-	ImplicitCallingTest();
-	ExplicitCallingTest();
+	ImplicitCallTest();
+	ExplicitCallTest();
 }
