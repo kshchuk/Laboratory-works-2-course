@@ -12,10 +12,13 @@ namespace Task_1_3
     /// <typeparam name="T"></typeparam>
     public class SNode<T> : MyNode<T>
     {
-        private new SNode<T> next;
+        private SNode<T> next;
 
         public SNode(T value)
-            : base(value) { }
+            : base(value) 
+        {
+            next = null;
+        }
         public SNode<T> Next
         {
             get { return next; }
