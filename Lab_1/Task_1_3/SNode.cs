@@ -12,7 +12,7 @@ namespace Task_1_3
     /// <typeparam name="T"></typeparam>
     public class SNode<T> : MyNode<T>
     {
-        public new SNode<T> next;
+        private new SNode<T> next;
 
         public SNode(T value)
             : base(value) { }
