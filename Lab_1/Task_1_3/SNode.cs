@@ -10,7 +10,7 @@ namespace Task_1_3
     /// Node for Single Linked List
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class SNode<T> : MyNode<T>
+    public class SNode<T> : INode<T>
     {
         private SNode<T> next;
         private T value;

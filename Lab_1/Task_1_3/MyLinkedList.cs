@@ -10,7 +10,7 @@ using System.Xml.Linq;
 
 namespace Task_1_3
 {
-    public class MyLinkedList<T> : MyList<T>, ICollection<T>, IEnumerable<T>, IEnumerator<T>, ICollection
+    public class MyLinkedList<T> : IList<T>, ICollection<T>, IEnumerable<T>, IEnumerator<T>, ICollection
     {
         protected SNode<T> head;
 

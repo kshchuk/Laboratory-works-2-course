@@ -10,7 +10,7 @@ namespace Task_1_3
     /// Node for double linked lists
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class DNode<T> : MyNode<T>
+    public class DNode<T> : INode<T>
     {
         private DNode<T> next;
         private DNode<T> prev;

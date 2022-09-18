@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task_1_3
 {
-    interface MyNode<T>
+    interface INode<T>
     {
         T Value { get; set; }
 

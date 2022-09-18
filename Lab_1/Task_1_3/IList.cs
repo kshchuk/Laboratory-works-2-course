@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task_1_3
 {
-    interface MyList<T>
+    interface IList<T>
     {
         void AddFirst(T item);
         void AddLast(T item);

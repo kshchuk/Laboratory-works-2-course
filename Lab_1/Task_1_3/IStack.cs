@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task_1_3
 {
-    interface MyStack<T>
+    interface IStack<T>
     {
         int Count { get; set; }
 
