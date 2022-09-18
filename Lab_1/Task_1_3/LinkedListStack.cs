@@ -22,6 +22,7 @@ namespace Task_1_3
                 current = current.Next;
                 temp.Invalidate();
             }
+            Count = 0;
         }
         public T Peek()
         {
