@@ -12,7 +12,7 @@ namespace Task_1_3
 {
     public class MyLinkedList<T> : MyList<T>, ICollection<T>, IEnumerable<T>, IEnumerator<T>, ICollection
     {
-        protected new SNode<T> head;
+        protected SNode<T> head;
 
         public MyLinkedList()
         {
@@ -100,8 +100,8 @@ namespace Task_1_3
             }
         }
 
-        // Implementing MyList abstract class
-        public override void AddFirst(T item)
+        // Implementing MyList interface
+        public void AddFirst(T item)
         {
             if (head == null)
                 head = new SNode<T>(item);
@@ -113,7 +113,7 @@ namespace Task_1_3
             }
             Count++;
         }
-        public override void AddLast(T item)
+        public void AddLast(T item)
         {
             if (head == null)
                 head = new SNode<T>(item);
@@ -125,7 +125,7 @@ namespace Task_1_3
             }
             Count++;
         }
-        public override void AddBefore(T newItem, T item)
+        public void AddBefore(T newItem, T item)
         {
             if (head == null)
                 throw new ArgumentException("Item does not exist in the list");
@@ -153,7 +153,7 @@ namespace Task_1_3
                 throw new ArgumentException("Item does not exist in the list");
             }
         }
-        public override void AddAfter(T newItem, T item)
+        public void AddAfter(T newItem, T item)
         {
             if (head == null)
                 throw new ArgumentException("Item does not exist in the list");
