@@ -25,8 +25,8 @@ namespace Task_1_3
         }
         public T Peek()
         {
-            if (this.isEmppy())
-                throw new Exception("The stack is empty");
+            if (this.isEmpty())
+                throw new InvalidOperationException("The stack is empty");
             else
             {
                 return top.Value;
@@ -34,8 +34,8 @@ namespace Task_1_3
         }
         public T Pop()
         {
-            if (this.isEmppy())
-                throw new Exception("The stack is empty");
+            if (this.isEmpty())
+                throw new InvalidOperationException("The stack is empty");
             else
             {
                 SNode<T> topNod = top;
@@ -46,7 +46,7 @@ namespace Task_1_3
                 return elem;
             }
         }
-        public bool isEmppy() => Count == 0;
+        public bool isEmpty() => Count == 0;
         public void Push(T item)
         {
             SNode<T> node = new SNode<T>(item);
