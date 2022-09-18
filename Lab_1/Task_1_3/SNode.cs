@@ -10,30 +10,23 @@ namespace Task_1_3
     /// Node for Single Linked List
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Node<T>
+    public class SNode<T> : MyNode<T>
     {
-        private Node<T> next;
-        private T item;
+        public new SNode<T> next;
 
-        public Node(T value)
+        public SNode(T value)
+            : base(value) { }
+        public SNode<T> Next
         {
-            this.item = value;
-        }
-
-        internal Node<T> Next {
             get { return next; }
             set { next = value; }
         }
-        public T Value
+        public override T Value
         {
             get { return item; }
             set { item = value; }
         }
-
-        /// <summary>
-        /// Destructor
-        /// </summary>
-        internal void Invalidate()
+        public override void Invalidate()
         {
             next = null;
         }

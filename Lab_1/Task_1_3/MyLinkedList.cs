@@ -10,9 +10,9 @@ using System.Xml.Linq;
 
 namespace Task_1_3
 {
-    public class MyLinkedList<T> : ICollection<T>, IEnumerable<T>, IEnumerator<T>, ICollection
-    {   
-        protected Node<T> head;
+    public class MyLinkedList<T> : MyList<T>, ICollection<T>, IEnumerable<T>, IEnumerator<T>, ICollection
+    {
+        protected new SNode<T> head;
 
         public MyLinkedList()
         {
@@ -27,21 +27,21 @@ namespace Task_1_3
         public void Add(T item)
         {
             if (head == null)
-                head = new Node<T>(item);
+                head = new SNode<T>(item);
             else
             {
-                Node<T> current = head;
+                SNode<T> current = head;
                 while (current.Next != null) current = current.Next;
-                current.Next = new Node<T>(item);
+                current.Next = new SNode<T>(item);
             }
             Count++;
         }
         public void Clear()
         {
-            Node<T> current = head;
+            SNode<T> current = head;
             while(current != null)
             {
-                Node<T> temp = current;
+                SNode<T> temp = current;
                 current = current.Next;
                 temp.Invalidate();
             }
@@ -49,7 +49,7 @@ namespace Task_1_3
         }
         public bool Remove(T item)
         {
-            Node<T> current = head;
+            SNode<T> current = head;
             if (current != null)
             {
                 if (current.Value.Equals(item))
@@ -62,7 +62,7 @@ namespace Task_1_3
                 {
                     if (current.Next.Value.Equals(item))
                     {
-                        Node<T> temp = current.Next;
+                        SNode<T> temp = current.Next;
                         current.Next = current.Next.Next;
                         temp.Invalidate();
                         return true;
@@ -73,7 +73,7 @@ namespace Task_1_3
         }
         public bool Contains(T item)
         {
-            Node<T> current = head;
+            SNode<T> current = head;
             while (current != null)
             {
                 if (current.Value.Equals(item))
@@ -84,7 +84,7 @@ namespace Task_1_3
         }
         public void CopyTo(T[] array, int arrayIndex)
         {
-            Node<T> current = head;
+            SNode<T> current = head;
             while (current != null)
             {
                 array[arrayIndex++] = current.Value;
@@ -93,38 +93,39 @@ namespace Task_1_3
         }
         public void CopyTo(Array array, int index)
         {
-            Node<T> current = head;
+            SNode<T> current = head;
             while (current != null)
             { 
                 array.SetValue(current.Value, index++);
             }
         }
 
-        public void AddFirst(T item)
+        // Implementing MyList abstract class
+        public override void AddFirst(T item)
         {
             if (head == null)
-                head = new Node<T>(item);
+                head = new SNode<T>(item);
             else
             {
-                Node<T> node = new Node<T>(item);
+                SNode<T> node = new SNode<T>(item);
                 node.Next = head;
                 head = node;
             }
             Count++;
         }
-        public void AddLast(T item)
+        public override void AddLast(T item)
         {
             if (head == null)
-                head = new Node<T>(item);
+                head = new SNode<T>(item);
             else
             {
-                Node<T> current = head;
+                SNode<T> current = head;
                 while (current.Next != null) current = current.Next;
-                current.Next = new Node<T>(item);
+                current.Next = new SNode<T>(item);
             }
             Count++;
         }
-        public void AddBefore(T newItem, T item)
+        public override void AddBefore(T newItem, T item)
         {
             if (head == null)
                 throw new ArgumentException("Item does not exist in the list");
@@ -135,12 +136,12 @@ namespace Task_1_3
             }
             else
             {
-                Node<T> current = head.Next;
+                SNode<T> current = head.Next;
                 while (current.Next != null)
                 {
                     if (current.Next.Value.Equals(item))
                     {
-                        Node<T> node = new Node<T>(newItem);
+                        SNode<T> node = new SNode<T>(newItem);
                         node.Next = current.Next;
                         current.Next = node;
                         Count++;
@@ -152,18 +153,18 @@ namespace Task_1_3
                 throw new ArgumentException("Item does not exist in the list");
             }
         }
-        public void AddAfter(T newItem, T item)
+        public override void AddAfter(T newItem, T item)
         {
             if (head == null)
                 throw new ArgumentException("Item does not exist in the list");
             else
             {
-                Node<T> current = head;
+                SNode<T> current = head;
                 while (current != null)
                 {
                     if (current.Value.Equals(item))
                     {
-                        Node<T> node = new Node<T>(newItem);
+                        SNode<T> node = new SNode<T>(newItem);
                         node.Next = current.Next;
                         current.Next = node;
                         Count++;
@@ -177,12 +178,12 @@ namespace Task_1_3
         }
 
         // Implementing IEnumerable<T>, IEnumerator<T> interfaces
-        private Node<T> current;
+        private SNode<T> current;
         public T Current => current.Value;
         object IEnumerator.Current => current.Value;
         public IEnumerator<T> GetEnumerator()
         {
-            Node<T> current = head;
+            SNode<T> current = head;
             while (current!=null)
             {
                 yield return current.Value;
