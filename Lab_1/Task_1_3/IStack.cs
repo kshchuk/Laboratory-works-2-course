@@ -8,8 +8,6 @@ namespace Task_1_3
 {
     interface IStack<T>
     {
-        int Count { get; set; }
-
         /// <summary>
         /// Deletes all elements
         /// </summary>
