@@ -203,6 +203,16 @@ public:
         root = nullptr;
     }
 
+    T GetMax()
+    {
+        Node* cur = root;
+        while (cur != nullptr)
+        {
+            cur = cur->right
+        }
+        return cur->data;
+    }
+
 #ifdef BENCHMARK_BENCHMARK_H_
 
 private:
