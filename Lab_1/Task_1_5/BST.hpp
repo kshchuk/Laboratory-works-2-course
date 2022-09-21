@@ -112,6 +112,11 @@ private:
 public:
     // Default constructor exists
 
+    bool isEmpty()
+    {
+        return root == nullptr;
+    }
+
     void append(T data, BST<T>::Node* node = nullptr) {
         if (!root) {
             root = new Node(data);
