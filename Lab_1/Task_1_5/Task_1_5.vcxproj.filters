@@ -40,13 +40,16 @@
     <ClInclude Include="PriorityQueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LinkedListPriorityQueue.h">
+    <ClInclude Include="LinkedListPriorityQueue.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ArrayPriorityQueue.h">
+    <ClInclude Include="ArrayPriorityQueue.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BST.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BSTPriorityQueue.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

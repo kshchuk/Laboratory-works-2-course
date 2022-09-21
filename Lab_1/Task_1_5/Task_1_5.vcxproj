@@ -218,11 +218,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ArrayPriorityQueue.h" />
+    <ClInclude Include="ArrayPriorityQueue.hpp" />
     <ClInclude Include="BST.hpp" />
+    <ClInclude Include="BSTPriorityQueue.hpp" />
     <ClInclude Include="dllmain.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="LinkedListPriorityQueue.h" />
+    <ClInclude Include="LinkedListPriorityQueue.hpp" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PriorityQueue.h" />
     <ClInclude Include="Resource.h" />
