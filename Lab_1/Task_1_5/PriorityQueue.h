@@ -1,7 +1,7 @@
 #pragma once
 
 /// <summary>
-/// Abstract class of the priority queue 
+/// Interface for the priority queue 
 /// </summary>
 /// <typeparam name="T"></typeparam>
 template<typename T>
@@ -24,8 +24,6 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	virtual T Peek() = 0;
-
-	virtual ~PriorityQueue() = 0;
 
 private:
 	virtual bool isEmpty() = 0;
