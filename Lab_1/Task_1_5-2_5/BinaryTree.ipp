@@ -60,7 +60,7 @@ namespace expr
 
 #ifdef _DEBUG
 
-	TEST_CASE("Delete node test") {
+	TEST_CASE("Delete node") {
 		BinaryTree<int> b1;
 		b1.root = new BinaryTree<int>::Node(1);
 		b1.root->left = new BinaryTree<int>::Node(11);
@@ -73,7 +73,7 @@ namespace expr
 		CHECK(b1.root->left->data == 112);
 	}
 
-	TEST_CASE("Copy tree test")
+	TEST_CASE("Copy tree")
 	{
 		BinaryTree<int> b1;
 		b1.root = new BinaryTree<int>::Node(1);

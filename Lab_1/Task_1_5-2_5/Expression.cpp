@@ -14,13 +14,16 @@
 
 #include <string>
 
+#include "doctest.h"
+
+
 namespace expr
 {
     /// <summary>
     /// Parses expression into RPN (reverse polish notation),
     ///  then fill it in binary tree
     /// </summary>
-    /// <param name="expression"> - Expression to handle</param>
+    /// <param name="expression"> - expression to handle</param>
     Expression::Expression(std::string expression) : BinaryTree()
     {
         std::vector<std::string> rpn;
@@ -52,7 +55,7 @@ namespace expr
         this->root = expr;
     }
 
-    std::string Expression::to_string(Node* node)
+    std::string Expression::to_string(Node* node) const
     {
         if (root == nullptr)
             return std::string("");
@@ -70,7 +73,7 @@ namespace expr
     }
 
     void Expression::ProcessOperation(std::string function, 
-        std::stack<std::string>& operators, std::vector<std::string>& rpn)
+        std::stack<std::string>& operators, std::vector<std::string>& rpn) const
     {
         int cur_function_priority = this->kFunctionsPriorities.at(function);
         while (!operators.empty())
@@ -86,14 +89,13 @@ namespace expr
         operators.push(function);
     }
 
-    std::vector<std::string> Expression::GenRpn(std::string expression)
+    std::vector<std::string> Expression::GenRpn(std::string expression) const
     {
         std::stack <std::string> operations;
         std::vector<std::string> rpn;
 
         for (int i = 0; i < expression.size(); i++)
         {
-            // First try to determine functions
             if (expression.find("log", i) == i) {
                 ProcessOperation(std::string("log"), operations, rpn);
                 i += 2;
@@ -125,15 +127,12 @@ namespace expr
                 i--;
                 rpn.push_back(var);
             }
-
-            // Otherwise operators
             else switch (expression[i])
             {
             case '(':
                 operations.push(std::string(1, expression[i]));
                 break;
             case ')':
-            {
                 while (operations.empty() || operations.top() != "(")
                 {
                     if (operations.empty())
@@ -144,20 +143,16 @@ namespace expr
                 }
                 operations.pop();
                 break;
-            }
+
             case '+':
             case '-':
             case '/':
             case '*':
             case '^':
-                // In case '-' precending brackets or var/number
-                if (expression[i] == '-' &&
-                    (expression[i + 1] == '(' || isalnum(expression[i + 1]))) {
-                    ProcessOperation(std::string("*"), operations, rpn);
-                    rpn.push_back("-1");
-                }
-                else 
-                    ProcessOperation(std::string(1, expression[i]), operations, rpn);
+                ProcessOperation(std::string(1, expression[i]), operations, rpn);
+                if (i > 1)
+                    if (expression[i] == '-' && expression[i - 1] == '(' && expression[i - 2] == '-')
+                        rpn.push_back("0");
                 break;
             default:
                 throw std::runtime_error("Input error: Invalid symbol\n");
@@ -175,7 +170,7 @@ namespace expr
         return rpn;
     }
 
-    bool Expression::isNumber(std::string str)
+    bool Expression::isNumber(std::string str) const
     {
         for (auto i : str) {
             char end = *(str.end() - 1);
@@ -191,11 +186,13 @@ namespace expr
             vars.push_back(var);
     }
 
-    bool Expression::isFunction(std::string str) {
+    bool Expression::isFunction(std::string str) const
+    {
         return kFunctionsPriorities.count(str) != 0;
     }
 
-    bool Expression::isUnaryFunction(std::string str) {
+    bool Expression::isUnaryFunction(std::string str) const
+    {
         if (!isFunction(str))
             return false;
         return kFunctionsPriorities.at(str) == 1;
@@ -218,7 +215,7 @@ namespace expr
         }
     }
 
-    bool Expression::Compare(Node* node_1, Node* node_2)
+    bool Expression::Compare(Node* node_1, Node* node_2) const
     {
         if (!node_1 && !node_2)
             return true;
@@ -338,7 +335,7 @@ namespace expr
         *tg_node = *mult;
     }
 
-    void Expression::PrintVarList()
+    void Expression::PrintVarList() const
     {
         for (auto var : vars)
             std::cout << var << ", ";
@@ -420,7 +417,7 @@ namespace expr
         *mult_node = *sum;
     }
 
-    double Expression::CalculateFunction(std::string function, double arg_1, double arg_2)
+    double Expression::CalculateFunction(std::string function, double arg_1, double arg_2) const
     {
         if (function == "+")
             return arg_1 + arg_2;
@@ -577,10 +574,10 @@ namespace expr
         ConvertVarsToNumbers(values, node->right);
     }
 
-    double Expression::CalculateExpression(std::map<std::string, double> variables_values)
+    double Expression::CalculateExpression(std::map<std::string, double> variables_values) const
     {
         Expression* temp = new Expression(Copy(this->root));
-        ConvertVarsToNumbers(variables_values, temp->root);
+        temp->ConvertVarsToNumbers(variables_values, temp->root);
         temp->Simplify();
         double res = std::stod(temp->root->data);
         temp->Clear(temp->root);
@@ -588,4 +585,142 @@ namespace expr
         return res;
     }
 
+#ifdef _DEBUG
+
+    TEST_CASE("Conversation to string")
+    {
+        Expression e("10*a+b");
+        CHECK(e.to_string() == "((10)*(a))+(b)");
+
+        e.LoadExpression("x+10^y");
+        CHECK(e.to_string() == "(x)+((10)^(y))");
+    }
+
+    TEST_CASE("Simplifie expression") {
+        Expression e("(x-x)+2");
+        e.Simplify();
+        CHECK(stod(e.to_string()) == 2);
+
+        e.LoadExpression("(11*2*x)^0");
+        e.Simplify();
+        CHECK(stod(e.to_string()) == 1);
+
+        e.LoadExpression("1*(sin(x)+10*0)/1");
+        e.Simplify();
+        CHECK(e.to_string() == "sin(x)");
+    }
+
+    TEST_CASE("Differentiate expression")
+    {
+        Expression e("(x-x)+2");
+        e.Differentiate(std::string("x"));
+        CHECK(stod(e.to_string()) == 0);
+
+        e.LoadExpression("x^2");
+        e.Differentiate(std::string("x"));
+        CHECK(e.to_string() == "(2)*(x)");
+
+        e.LoadExpression("sin(x)");
+        e.Differentiate(std::string("x"));
+        CHECK(e.to_string() == "cos(x)");
+
+        e.LoadExpression("x^ln(x)");
+        e.Differentiate(std::string("x"));
+        CHECK(e.to_string() == "(ln(x))*((x)^((ln(x))-(1)))");
+    }
+
+    TEST_CASE("Calculating expression")
+    {
+        Expression e("100*4+2");;
+        CHECK(doctest::Approx(e.CalculateExpression()) == 402);
+
+        e.LoadExpression("10^ln(4)");
+        CHECK(doctest::Approx(e.CalculateExpression()) == 24.33853);
+
+        e.LoadExpression("sin(x)");
+        std::map<std::string, double> vals{ { std::string("x"), 11.0 } };
+        CHECK(doctest::Approx(e.CalculateExpression(vals)) == -0.999992);
+
+        e.LoadExpression("5^ln(124.73)+12/4-1/1");
+        CHECK(doctest::Approx(e.CalculateExpression(vals)) == 2364.301);
+    }
+
+    TEST_CASE("Generate polish notation")
+    {
+        Expression e;
+        std::vector<std::string> v;
+        std::string s;
+
+        v = e.GenRpn("x+y*10");
+        s = "";
+        for (auto elem : v)
+            s += elem + " ";
+        CHECK(s == std::string("x y 10 * + "));
+
+        v = e.GenRpn(std::string("6*4/2^16+5/sin(10*1.2)^x"));
+        s = "";
+        for (auto elem : v)
+            s += elem + " ";
+        CHECK(s == std::string("6 4 * 2 16 ^ / 5 10 1.2 * sin x ^ / + "));
+
+        CHECK_THROWS_AS(e.GenRpn("(x+y*10"), const std::runtime_error&);
+    }
+
+    TEST_CASE("Binary function simplification")
+    {
+        Expression e;
+
+        BinaryTree<std::string>::Node* node1 = new BinaryTree<std::string>::Node("+");
+        node1->left = new BinaryTree<std::string>::Node("10"),
+        node1->right = new BinaryTree<std::string>::Node("-12");
+
+            
+        e.SimplifyBinaryFunction(node1);
+        CHECK(stod(node1->data) == -2);
+        
+        node1->data = "^"; node1->left->data = "0"; node1->right->data = "999";
+        e.SimplifyBinaryFunction(node1);
+        CHECK(stod(node1->data) == 0);
+
+        node1->data = "-"; node1->left->data = "x"; node1->right->data = "0";
+        e.SimplifyBinaryFunction(node1);
+        CHECK(e.root->data == "x");
+
+        node1 = new BinaryTree<std::string>::Node(); node1->left = new BinaryTree<std::string>::Node();
+        node1->right = new BinaryTree<std::string>::Node();
+        node1->data = "log"; node1->left->data = "1"; node1->right->data = "10";
+        CHECK_THROWS_AS(e.SimplifyBinaryFunction(node1), const std::overflow_error&);
+    }
+
+    TEST_CASE("Unary function simplification")
+    {
+        Expression e;
+
+        BinaryTree<std::string>::Node* node1 = new BinaryTree<std::string>::Node("sin");
+        node1->right = new BinaryTree<std::string>::Node("0");
+
+        e.SimplifyUnaryFunction(node1);
+        CHECK(stod(node1->data) == 0);
+
+        node1->data = "cos"; node1->right->data = "0";
+        e.SimplifyUnaryFunction(node1);
+        CHECK(stod(node1->data) == 1);
+
+
+        node1->data = "ln"; node1->right->data = "-5";
+        CHECK_THROWS_AS(e.SimplifyUnaryFunction(node1), const std::overflow_error&);
+    }
+
+    TEST_CASE("Functions calculating")
+    {
+        Expression e;
+
+        CHECK(e.CalculateFunction("^", 2, 10) == 1024);
+        CHECK(e.CalculateFunction("sin", 0) == 0);
+        CHECK(e.CalculateFunction("log", 3131, 1) == 0);
+        CHECK_THROWS_AS(e.CalculateFunction("/", 0), const std::overflow_error&);
+        CHECK_THROWS_AS(e.CalculateFunction("ln", -5), const std::overflow_error&);
+    }
+
+#endif // _DEBUG
 }
