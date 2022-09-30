@@ -1,5 +1,18 @@
+/*
+*
+ *  Expression.h
+ *
+ *  Created on: Sep 30, 2022
+ *
+ *  Author:  Yaroslav Kishchuk
+ *  Contact: Kshchuk@gmail.com
+ *
+ */
+
+
 #pragma once
 
+// For .dll exporting
 #ifdef TASK25_EXPORTS
 #define TASK25_API __declspec(dllexport)
 #else
@@ -7,24 +20,54 @@
 #endif
 
 #include <iostream>
-#include<vector>
-#include<stack>
+#include <vector>
+#include <stack>
 
 #include "BinaryTree.h"
 
+
 namespace expr
 {
-
+	/// <summary>
+	/// Class to store, calculate differtiate and simplify var-included expressions
+	/// </summary>
 	class TASK25_API Expression : public BinaryTree<std::string>
 	{
 	public:
 		Expression() : BinaryTree() {};
-		Expression(std::string);
 
+		/// <summary>
+		/// Creates binary tree based on expression
+		/// </summary>
+		/// <param name="expression"></param>
+		Expression(std::string expression);
+		/// <summary>
+		/// Load expression into Expression class
+		/// </summary>
+		/// <param name="expression"></param>
 		void LoadExpression(std::string expression);
+		/// <summary>
+		/// Prints all vars presented in the expression
+		/// </summary>
 		void PrintVarList();
+		/// <summary>
+		/// Simplifies expression
+		/// </summary>
+		/// <param name="node"> - Starting node </param>
+		/// <param name="parent"> - Parent of the starting node </param>
 		void Simplify(Node* node = nullptr, Node* parent = nullptr);
+		/// <summary>
+		/// Differentiates expression by a specified variable
+		/// </summary>
+		/// <param name="var"> - Variable to differenciate by </param>
+		/// <param name="node"> - Binary tree node to differentiate </param>
+		/// <returns></returns>
 		Node* Differentiate(std::string var, Node* node = nullptr);
+		/// <summary>
+		/// Calculate expression if possible
+		/// </summary>
+		/// <param name="values_of_variables"> - Variables and values </param>
+		/// <returns></returns>
 		double CalculateExpression(std::map<std::string, double> values_of_variables = 
 			std::map<std::string, double>());
 		std::string to_string(Node* node = nullptr);

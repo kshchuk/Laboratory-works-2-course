@@ -37,7 +37,6 @@ struct Item
 		: data(data), priority(priority) {}
 };
 
-
 template<typename T>
 class BSTPriorityQueue 
 	: public PriorityQueue<T>, private BST<Item<T>>
