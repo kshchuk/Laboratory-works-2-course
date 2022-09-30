@@ -12,13 +12,6 @@
 
 #pragma once
 
-// For .dll exporting
-#ifdef TASK25_EXPORTS
-#define TASK25_API __declspec(dllexport)
-#else
-#define TASK25_API __declspec(dllimport)
-#endif
-
 #include <iostream>
 #include <vector>
 #include <stack>
@@ -31,7 +24,7 @@ namespace expr
 	/// <summary>
 	/// Class to store, calculate differtiate and simplify var-included expressions
 	/// </summary>
-	class TASK25_API Expression : public BinaryTree<std::string>
+	class Expression : public BinaryTree<std::string>
 	{
 	public:
 		Expression() : BinaryTree() {};
@@ -61,7 +54,7 @@ namespace expr
 		/// </summary>
 		/// <param name="var"> - Variable to differenciate by </param>
 		/// <param name="node"> - Binary tree node to differentiate </param>
-		/// <returns></returns>
+		/// <returns> Link to </returns>
 		Node* Differentiate(std::string var, Node* node = nullptr);
 		/// <summary>
 		/// Calculate expression if possible

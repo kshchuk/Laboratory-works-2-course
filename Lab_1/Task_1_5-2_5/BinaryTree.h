@@ -41,7 +41,7 @@ namespace expr
 		/// Deletes selected node. In order not to break the connectivity of the tree,
 		///  connects node's parent node with node's child node.
 		/// </summary>
-		/// <param name="node"> - Node to delete </param>
+		/// <param name="node"> - node to delete </param>
 		/// <param name="parent"> - node's parent </param>
 		/// <param name="child"> - node's child </param>
 		/// <returns></returns>
@@ -49,8 +49,8 @@ namespace expr
 		/// <summary>
 		/// Copies all data of subtree into new tree
 		/// </summary>
-		/// <param name="node"> - Old subtree root </param>
-		/// <returns> - Root of the new tree </returns>
+		/// <param name="node"> - old subtree root </param>
+		/// <returns> Root of the new tree </returns>
 		Node* Copy(Node* node)
 		{
 			if (!node)
@@ -69,7 +69,7 @@ namespace expr
 		/// <summary>
 		/// Deletes all nodes of the tree except the tree's root
 		/// </summary>
-		/// <param name="root"> - Root of the tree to delete </param>
+		/// <param name="root"> - root of the tree to delete </param>
 		/// <returns></returns>
 		void Clear(Node* root = nullptr);
 
