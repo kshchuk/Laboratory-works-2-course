@@ -135,6 +135,7 @@
     <ClInclude Include="BinaryTree.h" />
     <ClInclude Include="BST.hpp" />
     <ClInclude Include="BSTPriorityQueue.hpp" />
+    <ClInclude Include="doctest.h" />
     <ClInclude Include="Expression.h" />
     <ClInclude Include="LinkedListPriorityQueue.hpp" />
     <ClInclude Include="PriorityQueue.h" />
