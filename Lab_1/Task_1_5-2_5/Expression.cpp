@@ -10,7 +10,6 @@
  */
 
 
-#include "pch.h" // for .dll
 #include "Expression.h"
 
 #include <string>
