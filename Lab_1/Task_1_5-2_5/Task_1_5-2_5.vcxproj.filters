@@ -47,5 +47,8 @@
     <ClInclude Include="doctest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BinaryTree.ipp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

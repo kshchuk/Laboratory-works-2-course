@@ -133,6 +133,7 @@
   <ItemGroup>
     <ClInclude Include="ArrayPriorityQueue.hpp" />
     <ClInclude Include="BinaryTree.h" />
+    <ClInclude Include="BinaryTree.ipp" />
     <ClInclude Include="BST.hpp" />
     <ClInclude Include="BSTPriorityQueue.hpp" />
     <ClInclude Include="doctest.h" />

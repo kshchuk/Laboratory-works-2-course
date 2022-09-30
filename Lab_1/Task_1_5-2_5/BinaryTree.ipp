@@ -9,33 +9,13 @@
  *
  */
 
-
 #include "BinaryTree.h"
+
+#include "doctest.h"
+
 
 namespace expr
 {
-	//template<typename T>
-	//inline void BinaryTree<T>::Print(Node* node)
-	//{
-	//	if (root == nullptr)
-	//		return;
-	//	if (node == nullptr)
-	//		node = root;
-
-	//	if (node) {
-	//		std::cout << node->data << ' ';
-
-	//		if (node->left == nullptr && node->right == nullptr)
-	//			return;
-	//		std::cout << "(";
-	//		if (node->left != nullptr)
-	//			Print(node->left);
-	//		if (node->right != nullptr)
-	//			Print(node->right);
-	//		std::cout << ")";
-	//	}
-	//}
-
 	template<typename T>
 	inline void BinaryTree<T>::Clear(Node* node)
 	{
@@ -77,4 +57,54 @@ namespace expr
 			parent->right = temp;
 		}
 	}
+
+#ifdef _DEBUG
+
+	TEST_CASE("Delete node test") {
+		BinaryTree<int> b1;
+		b1.root = new BinaryTree<int>::Node(1);
+		b1.root->left = new BinaryTree<int>::Node(11);
+		b1.root->right = new BinaryTree<int>::Node(12);
+		b1.root->left->left = new BinaryTree<int>::Node(111);
+		b1.root->left->right = new BinaryTree<int>::Node(112);
+
+		b1.DeleteNode(b1.root, b1.root->left, b1.root->left->right);
+
+		CHECK(b1.root->left->data == 112);
+	}
+
+	TEST_CASE("Copy tree test")
+	{
+		BinaryTree<int> b1;
+		b1.root = new BinaryTree<int>::Node(1);
+		b1.root->left = new BinaryTree<int>::Node(11);
+		b1.root->right = new BinaryTree<int>::Node(12);
+		b1.root->left->left = new BinaryTree<int>::Node(111);
+		b1.root->left->right = new BinaryTree<int>::Node(112);
+
+		BinaryTree<int> b2;
+		b2.root = b1.Copy(b1.root);
+
+		CHECK(b1.root->data == b2.root->data);
+		CHECK(b1.root->left->data == b2.root->left->data);
+		CHECK(b1.root->right->data == b2.root->right->data);
+		CHECK(b1.root->left->left->data == b2.root->left->left->data);
+		CHECK(b1.root->left->right->data == b2.root->left->right->data);
+	}
+
+	TEST_CASE("Clear the tree")
+	{
+		BinaryTree<int> b1;
+		b1.root = new BinaryTree<int>::Node(1);
+		b1.root->left = new BinaryTree<int>::Node(11);
+		b1.root->right = new BinaryTree<int>::Node(12);
+		b1.root->left->left = new BinaryTree<int>::Node(111);
+		b1.root->left->right = new BinaryTree<int>::Node(112);
+
+		b1.Clear();
+
+		CHECK(b1.root->left == nullptr);
+		CHECK(b1.root->right == nullptr);
+	}
+#endif // _DEBUG
 }

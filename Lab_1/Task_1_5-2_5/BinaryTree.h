@@ -13,7 +13,13 @@
 #pragma once
 
 #include <map>
-#include <cmath>
+
+ // For unit testing of private methods
+#ifdef _DEBUG
+#define private public
+#define protected public
+#endif
+
 
 namespace expr
 {
@@ -49,9 +55,9 @@ namespace expr
 		/// <summary>
 		/// Copies all data of subtree into new tree
 		/// </summary>
-		/// <param name="node"> - old subtree root </param>
+		/// <param name="node"> - Source subtree root </param>
 		/// <returns> Root of the new tree </returns>
-		Node* Copy(Node* node)
+		Node* Copy(const Node* node) const
 		{
 			if (!node)
 				return nullptr;
@@ -65,14 +71,17 @@ namespace expr
 		}
 
 	public:
-
 		/// <summary>
 		/// Deletes all nodes of the tree except the tree's root
 		/// </summary>
 		/// <param name="root"> - root of the tree to delete </param>
 		/// <returns></returns>
 		void Clear(Node* root = nullptr);
-
 	};
 }
+
+
+#undef private
+#undef protected
+
 #include "BinaryTree.ipp"
