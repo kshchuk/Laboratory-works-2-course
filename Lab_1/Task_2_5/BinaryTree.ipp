@@ -1,3 +1,15 @@
+/*
+*
+ *  BinaryTree.ipp
+ *
+ *  Created on: Sep 30, 2022
+ *
+ *  Author:  Yaroslav Kishchuk
+ *  Contact: Kshchuk@gmail.com
+ *
+ */
+
+
 #include "BinaryTree.h"
 
 namespace expr

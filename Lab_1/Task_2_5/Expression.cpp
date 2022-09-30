@@ -1,11 +1,27 @@
-#include "pch.h"
+/*
+*
+ *  Expression.cpp
+ *
+ *  Created on: Sep 30, 2022
+ *
+ *  Author:  Yaroslav Kishchuk
+ *  Contact: Kshchuk@gmail.com
+ *
+ */
+
+
+#include "pch.h" // for .dll
 #include "Expression.h"
 
 #include <string>
 
 namespace expr
 {
-
+    /// <summary>
+    /// Parses expression into RPN (reverse polish notation),
+    ///  then fill it in binary tree
+    /// </summary>
+    /// <param name="expression"> - Expression to handle</param>
     Expression::Expression(std::string expression) : BinaryTree()
     {
         std::vector<std::string> rpn;
@@ -21,6 +37,10 @@ namespace expr
         GenSubTree(&this->root, start);
     }
 
+    /// <summary>
+    /// Delete previous data and create new Expression
+    /// </summary>
+    /// <param name="expression"></param>
     void Expression::LoadExpression(std::string expression) 
     {
         this->Clear(root);
