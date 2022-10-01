@@ -19,11 +19,9 @@
 
 namespace expr
 {
-    /// <summary>
-    /// Parses expression into RPN (reverse polish notation),
+    /// @brief Parses expression into RPN (reverse polish notation),
     ///  then fill it in binary tree
-    /// </summary>
-    /// <param name="expression"> - expression to handle</param>
+    /// @param expression Expression to handle
     Expression::Expression(std::string expression) : BinaryTree()
     {
         std::vector<std::string> rpn;
@@ -39,10 +37,8 @@ namespace expr
         GenSubTree(&this->root, start);
     }
 
-    /// <summary>
-    /// Delete previous data and create new Expression
-    /// </summary>
-    /// <param name="expression"></param>
+    /// @brief Delete previous data and create new Expression
+    /// @param expression New data
     void Expression::LoadExpression(std::string expression) 
     {
         this->Clear(root);

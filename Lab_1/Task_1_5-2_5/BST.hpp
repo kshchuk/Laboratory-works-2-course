@@ -22,14 +22,12 @@
 #define protected public
 #endif
 
-/// <summary>
-/// Binary search tree class
-/// </summary>
-/// <typeparam name="T"> -  comparative type </typeparam>
+/// @brief Is used to store comparative values
+/// @tparam T 
 template<typename T>
 class BST
 {
-private:
+protected:
     struct Node {
         T data;
         Node* left = nullptr, * right = nullptr;
@@ -40,6 +38,9 @@ private:
 
     Node* root = nullptr;
 
+    /// @brief Search node with the minumum value
+    /// @param node Node to start from
+    /// @return Link to the minimum value node
     Node* minValueNode(Node* node)
     {
         Node* current = node;
@@ -48,7 +49,10 @@ private:
         return current;
     }
 
-    // Deleting node recursively
+    /// @brief Deletes node with the specified value from the tree, recursively
+    /// @param node Current node
+    /// @param data Value of the node to delete
+    /// @return Link to the current node with deleted childrens
     Node* deleteNode(Node* node, T data)
     {
         if (node == nullptr)
@@ -83,12 +87,11 @@ private:
         }
         return node;
     }
-    /// <summary>
-    /// Searches data, starting recursively
-    /// </summary>
-    /// <param name="node"> - node to find</param>
-    /// <param name="data"></param>
-    /// <returns></returns>
+
+    /// @brief Searches node with the specified value, recursively
+    /// @param node Current node
+    /// @param data Searched node value
+    /// @return Link to the searched node if value exist, nullptr otherwise
     Node* search(Node* node, T data) {
         if (node == nullptr || node->data == data)
             return node;
@@ -99,7 +102,11 @@ private:
         return search(node->left, data);
     }
 
-    // Searching nodes by elements range recursively
+    /// @brief Collects data by elements range, recursively
+    /// @param node Current node
+    /// @param interval Container to insert found data
+    /// @param min Minimum element of the range
+    /// @param max Maximum element of the range
     void searchElementsByInterval(Node* node, std::list<T>& interval, T& min, T& max) const
     {
         if (!node)
@@ -114,7 +121,11 @@ private:
         searchElementsByInterval(node->right, interval, min, max);
     }
 
-    void InOrder(std::vector<T>& elements, Node* node = nullptr) {
+    /// @brief Respresents tree as array, recursively
+    /// @param elements Container to insetr elements
+    /// @param node Current node
+    void InOrder(std::vector<T>& elements, Node* node = nullptr) const
+    {
         if (!node)
             node = root;
         if (!root)
@@ -127,6 +138,8 @@ private:
             InOrder(elements, node->right);
     }
 
+    /// @brief Delete all elements
+    /// @param node Current node
     void clearRecursive(Node* node) {
         if (!node)
             return;
@@ -138,17 +151,20 @@ private:
     }
 
 public:
-    // Default constructor exists
-
     bool isEmpty() const
     {
         return root == nullptr;
     }
+
     /// <summary>
     /// Adds element recursively
     /// </summary>
     /// <param name="data"></param>
     /// <param name="node"></param>
+
+    /// @brief Inserts data to the tree, recursively
+    /// @param data Data to insert
+    /// @param node Current node
     void append(T data, BST<T>::Node* node = nullptr) {
         if (!root) {
             root = new Node(data);
@@ -206,10 +222,9 @@ public:
         if (node->right)
             print(node->right);
     }
-    /// <summary>
-    /// Increments each element in the BST by one
-    /// </summary>
-    /// <param name="node"></param>
+
+    /// @brief Increments each element in the BST by one, recursively
+    /// @param node Current node
     void IncrementElemByOne(Node* node = nullptr) {
         if (!node)
             node = root;
@@ -243,7 +258,7 @@ public:
     T GetMax() const
     {
         Node* cur = root;
-        while (cur->right != nullptr)
+        while (cur != nullptr)
         {
             cur = cur->right;
         }

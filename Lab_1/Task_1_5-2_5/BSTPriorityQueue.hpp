@@ -2,8 +2,10 @@
 
 #include <stdexcept>
 
+#include "item.h"
 #include "BST.hpp"
 #include "priority_queue.h"
+
 #include "doctest.h"
 
 // For private methods unit testing
@@ -12,52 +14,15 @@
 #define protected public
 #endif
 
-/// <summary>
-/// Extra class to store and compare queue elements. 
-/// BST must have comparative elements
-/// </summary>
-/// <typeparam name="T"></typeparam>
-template<typename T>
-struct Item
-{
-	T data;
-	int priority;
-
-	bool operator<(Item item)
-	{
-		return (this->priority < item.priority);
-	}
-	bool operator>(Item item)
-	{
-		return (this->priority > item.priority);
-	}
-	bool operator==(Item item)
-	{
-		return (this->priority == item.priority);
-	}
-	bool operator<=(Item item)
-	{
-		return (this->priority <= item.priority);
-	}
-	bool operator>=(Item item)
-	{
-		return (this->priority >= item.priority);
-	}
-
-	Item(T data, int priority)
-		: data(data), priority(priority) {}
-};
-
+/// @brief Priority queue based on binary search tree
+/// @tparam T 
 template<typename T>
 class BSTPriorityQueue 
-	: public PriorityQueue<T>, private BST<Item<T>>
+	: public PriorityQueue<T>
 {
 public:
-	/// <inheritdoc />
 	T Peek() const override;
-	/// <inheritdoc />
 	T Pop() override;
-	/// <inheritdoc />
 	void Insert(T data, int priority) override;
 
 private:

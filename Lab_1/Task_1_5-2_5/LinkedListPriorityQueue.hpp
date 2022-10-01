@@ -12,7 +12,8 @@
 #define protected public
 #endif
 
-
+/// @brief Priority queue based on linked list
+/// @tparam T 
 template <typename T>
 class LinkedListPriorityQueue :
     public PriorityQueue<T>        
@@ -48,11 +49,8 @@ private:
     };
 
 public:
-    /// <inheritdoc />
     T Peek() const override;
-    /// <inheritdoc />
     T Pop() override;
-    /// <inheritdoc />
     void Insert(T data, int priority) override;
 
     ~LinkedListPriorityQueue();

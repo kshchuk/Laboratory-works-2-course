@@ -23,10 +23,8 @@
 
 namespace expr
 {
-	/// <summary>
-	/// Class for storing and processing data in binary tree structure
-	/// </summary>
-	/// <typeparam name="T"></typeparam>
+	/// @brief Class for storing and processing data in binary tree structure
+	/// @tparam T 
 	template <typename T>
 	class BinaryTree
 	{
@@ -42,21 +40,18 @@ namespace expr
 
 		Node* root;
 
-		BinaryTree() : root(nullptr) {}
-		/// <summary>
-		/// Deletes selected node. In order not to break the connectivity of the tree,
+		BinaryTree() : root(nullptr) {}		
+
+		/// @brief Deletes selected node. In order not to break the connectivity of the tree,
 		///  connects node's parent node with node's child node.
-		/// </summary>
-		/// <param name="node"> - node to delete </param>
-		/// <param name="parent"> - node's parent </param>
-		/// <param name="child"> - node's child </param>
-		/// <returns></returns>
+		/// @param parent Node's parent
+		/// @param node Node to delete
+		/// @param child Node's child to reconnect parent to
 		void DeleteNode(Node* parent, Node* node, Node* child);
-		/// <summary>
-		/// Copies all data of subtree into new tree
-		/// </summary>
-		/// <param name="node"> - Source subtree root </param>
-		/// <returns> Root of the new tree </returns>
+
+		/// @brief Copies all data of subtree into new tree
+		/// @param node Source subtree root
+		/// @return Root of the new tree 
 		Node* Copy(const Node* node) const
 		{
 			if (!node)
@@ -71,11 +66,9 @@ namespace expr
 		}
 
 	public:
-		/// <summary>
-		/// Deletes all nodes of the tree except the tree's root
-		/// </summary>
-		/// <param name="root"> - root of the tree to delete </param>
-		/// <returns></returns>
+
+		/// @brief Deletes all nodes of the tree except the tree's root
+		/// @param root Root of the tree to delete 
 		void Clear(Node* root = nullptr);
 	};
 }

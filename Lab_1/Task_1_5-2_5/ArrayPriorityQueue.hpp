@@ -25,7 +25,8 @@
 #define protected public
 #endif
 
-
+/// @brief Priority queue based on changeble lenght arrays 
+/// @tparam T 
 template<typename T>
 class ArrayPriorityQueue 
 	: public PriorityQueue<T>
@@ -45,17 +46,13 @@ private:
     };
 
 public:
-    /// <inheritdoc />
     T Peek() const override;
-    /// <inheritdoc />
     T Pop() override;
-    /// <inheritdoc />
     void Insert(T data, int priority) override;
 
 private:
     std::vector<Item> arr;
 
-    /// <inheritdoc />
     bool isEmpty() const override;
 };
 

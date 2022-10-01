@@ -1,30 +1,24 @@
 #pragma once
 
-/// <summary>
-/// Interface for the priority queue 
-/// </summary>
-/// <typeparam name="T"></typeparam>
+/// @brief Interface for the priority queue 
+/// @tparam T 
 template<typename T>
 class PriorityQueue
 {
 public:
-	/// <summary>
-	/// Insert element with priority
-	/// </summary>
-	/// <param name="data"></param>
-	/// <param name="priority"></param>
+	/// @brief Insert element with it's priority
+	/// @param data 
+	/// @param priority 
 	virtual void Insert(T data, int priority) = 0;
-	/// <summary>
-	/// Pull element with the highest priority and delete it from the queue
-	/// </summary>
-	/// <exception cref="std::underflow_error"> Thrown when there is no elementes </exception>
-	/// <returns></returns>
+
+	/// @brief Pull element with the highest priority and delete it from the queue
+	/// @exception std::underflow_error Thrown when there is no elemente
+	/// @return Element's value
 	virtual T Pop() = 0;
-	/// <summary>
-	/// Pull element with the highest priority but don't delete it
-	/// </summary>
-	/// <exception cref="std::underflow_error"> Thrown when there is no elementes </exception>
-	/// <returns></returns>
+
+	/// @brief Pull element with the highest priority but don't delete it
+	/// @exception std::underflow_error Thrown when there is no elemente
+	/// @return Element's value
 	virtual T Peek() const = 0;
 
 private:
