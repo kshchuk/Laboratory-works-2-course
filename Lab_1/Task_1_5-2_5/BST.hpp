@@ -1,7 +1,31 @@
+/*
+*
+ *  BST.hpp
+ *
+ *  Created on: Sep 30, 2022
+ *
+ *  Author:  Yaroslav Kishchuk
+ *  Contact: Kshchuk@gmail.com
+ *
+ */
+
 #pragma once
 
 #include <list>
+#include <vector>
 
+#include "doctest.h"
+
+ // For private methods unit testing
+#ifdef _DEBUG
+#define private public
+#define protected public
+#endif
+
+/// <summary>
+/// Binary search tree class
+/// </summary>
+/// <typeparam name="T"> -  comparative type </typeparam>
 template<typename T>
 class BST
 {
@@ -15,7 +39,6 @@ private:
     };
 
     Node* root = nullptr;
-
 
     Node* minValueNode(Node* node)
     {
@@ -60,8 +83,12 @@ private:
         }
         return node;
     }
-
-    // Searching node recursively
+    /// <summary>
+    /// Searches data, starting recursively
+    /// </summary>
+    /// <param name="node"> - node to find</param>
+    /// <param name="data"></param>
+    /// <returns></returns>
     Node* search(Node* node, T data) {
         if (node == nullptr || node->data == data)
             return node;
@@ -73,7 +100,8 @@ private:
     }
 
     // Searching nodes by elements range recursively
-    void searchElementsByInterval(Node* node, std::list<T>& interval, T& min, T& max) {
+    void searchElementsByInterval(Node* node, std::list<T>& interval, T& min, T& max) const
+    {
         if (!node)
             return;
 
@@ -112,11 +140,15 @@ private:
 public:
     // Default constructor exists
 
-    bool isEmpty()
+    bool isEmpty() const
     {
         return root == nullptr;
     }
-
+    /// <summary>
+    /// Adds element recursively
+    /// </summary>
+    /// <param name="data"></param>
+    /// <param name="node"></param>
     void append(T data, BST<T>::Node* node = nullptr) {
         if (!root) {
             root = new Node(data);
@@ -150,17 +182,19 @@ public:
         this->root = deleteNode(this->root, data);
     }
 
-    bool GetElem(T data) {
+    bool GetElem(T data) const{
         return (search(this->root, data) != nullptr);
     }
 
-    std::list<T> GetElementsByInterval(T min, T max) {
+    std::list<T> GetElementsByInterval(T min, T max) const
+    {
         std::list<T> interval;
         searchElementsByInterval(this->root, interval, min, max);
         return interval;
     }
 
-    void print(Node* node = nullptr) {
+    void print(Node* node = nullptr) const
+    {
         if (!node)
             node = root;
         if (!root)
@@ -172,7 +206,10 @@ public:
         if (node->right)
             print(node->right);
     }
-
+    /// <summary>
+    /// Increments each element in the BST by one
+    /// </summary>
+    /// <param name="node"></param>
     void IncrementElemByOne(Node* node = nullptr) {
         if (!node)
             node = root;
@@ -203,12 +240,12 @@ public:
         root = nullptr;
     }
 
-    T GetMax()
+    T GetMax() const
     {
         Node* cur = root;
-        while (cur != nullptr)
+        while (cur->right != nullptr)
         {
-            cur = cur->right
+            cur = cur->right;
         }
         return cur->data;
     }
@@ -384,3 +421,6 @@ public:
 #endif
 
 };
+
+#undef private
+#undef protected
