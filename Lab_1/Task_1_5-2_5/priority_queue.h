@@ -1,6 +1,6 @@
 #pragma once
 
-/// @brief Interface for the priority queue 
+/// @brief Interface for the priority queue classes
 /// @tparam T 
 template<typename T>
 class PriorityQueue

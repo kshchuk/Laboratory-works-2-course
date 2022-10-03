@@ -1,7 +1,8 @@
 #pragma once
 
 /// @brief Extra class to store and compare queue elements. 
-/// Tree based queues must have comparative elements
+/// Includes overloaded comparative operators.
+/// Tree based queues must have comparative elements. 
 /// @tparam T 
 template<typename T>
 struct Item
@@ -29,6 +30,8 @@ struct Item
 	{
 		return (this->priority >= item.priority);
 	}
+
+	Item() {}
 
 	Item(T data, int priority)
 		: data(data), priority(priority) {}

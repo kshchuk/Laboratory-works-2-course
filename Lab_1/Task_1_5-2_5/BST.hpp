@@ -27,7 +27,7 @@
 template<typename T>
 class BST
 {
-protected:
+private:
     struct Node {
         T data;
         Node* left = nullptr, * right = nullptr;
@@ -156,12 +156,6 @@ public:
         return root == nullptr;
     }
 
-    /// <summary>
-    /// Adds element recursively
-    /// </summary>
-    /// <param name="data"></param>
-    /// <param name="node"></param>
-
     /// @brief Inserts data to the tree, recursively
     /// @param data Data to insert
     /// @param node Current node
@@ -255,14 +249,21 @@ public:
         root = nullptr;
     }
 
+    /// @brief Gets maximum tree element 
+    /// @return Maximum element
     T GetMax() const
     {
         Node* cur = root;
-        while (cur != nullptr)
+        while (cur->right != nullptr)
         {
             cur = cur->right;
         }
         return cur->data;
+    }
+
+    ~BST()
+    {
+        this->clear();
     }
 
 #ifdef BENCHMARK_BENCHMARK_H_

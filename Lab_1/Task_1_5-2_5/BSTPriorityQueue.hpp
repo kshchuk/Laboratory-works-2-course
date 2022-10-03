@@ -68,7 +68,6 @@ inline bool BSTPriorityQueue<T>::isEmpty() const
 	return tree.isEmpty();
 }
 
-
 #ifdef _DEBUG
 TEST_CASE("Insert")
 {
