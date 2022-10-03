@@ -41,7 +41,7 @@
     <ClInclude Include="LinkedListPriorityQueue.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PriorityQueue.h">
+    <ClInclude Include="priority_queue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="doctest.h">
@@ -49,6 +49,18 @@
     </ClInclude>
     <ClInclude Include="BinaryTree.ipp">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AVLPriorityQueue.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="2-3Tree.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AVLTree.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="item.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -131,15 +131,19 @@
     <ClCompile Include="Task_1_5-2_5.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="2-3Tree.hpp" />
     <ClInclude Include="ArrayPriorityQueue.hpp" />
+    <ClInclude Include="AVLPriorityQueue.hpp" />
+    <ClInclude Include="AVLTree.hpp" />
     <ClInclude Include="BinaryTree.h" />
     <ClInclude Include="BinaryTree.ipp" />
     <ClInclude Include="BST.hpp" />
     <ClInclude Include="BSTPriorityQueue.hpp" />
     <ClInclude Include="doctest.h" />
     <ClInclude Include="Expression.h" />
+    <ClInclude Include="item.h" />
     <ClInclude Include="LinkedListPriorityQueue.hpp" />
-    <ClInclude Include="PriorityQueue.h" />
+    <ClInclude Include="priority_queue.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
