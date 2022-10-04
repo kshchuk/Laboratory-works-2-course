@@ -1,4 +1,4 @@
-﻿namespace Task_2_10
+﻿namespace list_2
 {
     public class Book
     {

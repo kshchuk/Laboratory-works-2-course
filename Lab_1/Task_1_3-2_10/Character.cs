@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Task_2_10
+namespace list_2
 {
     /// <summary>
     /// The character's level of involvement in the book

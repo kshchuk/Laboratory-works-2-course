@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task_1_3
+namespace list_1
 {
     interface IDeque<T>
     {

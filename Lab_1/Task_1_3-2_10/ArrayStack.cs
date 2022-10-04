@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Task_1_3
+namespace list_1
 {
     public class ArrayStack<T> : IStack<T>
     {

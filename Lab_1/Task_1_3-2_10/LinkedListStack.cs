@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace Task_1_3
+namespace list_1
 {
     public class LinkedListStack<T> : IStack<T>
     {
