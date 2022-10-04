@@ -21,6 +21,13 @@ public:
 	/// @return Element's value
 	virtual T Peek() const = 0;
 
+	virtual ~PriorityQueue();
+
 private:
 	virtual bool isEmpty() const = 0;
 };
+
+template<typename T>
+inline PriorityQueue<T>::~PriorityQueue()
+{
+}
