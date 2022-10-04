@@ -31,6 +31,13 @@ struct Item
 		return (this->priority >= item.priority);
 	}
 
+	Item& operator=(const Item& item)
+	{
+		this->data = item.data;
+		this->priority = item.priority;
+		return *this;
+	}
+
 	Item() {}
 
 	Item(T data, int priority)
