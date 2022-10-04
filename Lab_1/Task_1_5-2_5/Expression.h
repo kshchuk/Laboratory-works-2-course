@@ -33,11 +33,11 @@ namespace expr
 	class Expression
 	{
 	public:
+		using ENode = BinaryTree<std::string>::Node;
+
 		/// @exception std::runtime_error Thrown when there is invalid input in the expression
 		Expression() {};
 		Expression(const Expression&);
-
-		~Expression();
 
 		/// @brief Creates the expression based on the binary tree
 		/// @param expression 
@@ -50,13 +50,13 @@ namespace expr
 		/// @brief Simplifies expression
 		/// @param node Starting node
 		/// @param parent Starting node parent
-		void Simplify(BinaryTree<std::string>::Node* node = nullptr, BinaryTree<std::string>::Node* parent = nullptr);
+		void Simplify(ENode* node = nullptr, ENode* parent = nullptr);
 
 		/// @brief Differentiates expression by a specified variable
 		/// @param var Variable to differenciate by
 		/// @param node Expression tree node to differentiate
 		/// @return Link to the differentiated node
-		BinaryTree<std::string>::Node* Differentiate(std::string var, BinaryTree<std::string>::Node* node = nullptr);
+		ENode* Differentiate(std::string var, ENode* node = nullptr);
 
 		/// @brief Calculate expression if possible
 		/// @param values_of_variables Variables and their values
@@ -67,16 +67,17 @@ namespace expr
 		/// @brief Returns expression as string
 		/// @param node Current node of the expression tree<
 		/// @return Expression as string
-		std::string to_string( BinaryTree<std::string>::Node* node = nullptr) const; 
+		std::string to_string(ENode* node = nullptr) const; 
 
 		std::vector<std::string> get_vars() const;
 
 		Expression& operator=(const Expression &expr);
 
 	private:
+
 		BinaryTree<std::string> tree;
 
-		Expression(BinaryTree<std::string>::Node*);
+		Expression(ENode*);
 
 		const std::map<std::string, int> kFunctionsPriorities =
 		{ {"sin", 1}, {"cos", 1}, {"tg", 1}, {"log", 2}, {"ln", 1}, {"^", 3},
@@ -100,26 +101,26 @@ namespace expr
 		/// @brief Converts RPN into binary tree
 		/// @param root Root of the tree
 		/// @param start Starting RPN element
-		void GenSubTree(BinaryTree<std::string>::Node** root, std::vector<std::string>::iterator& start);
+		void GenSubTree(ENode** root, std::vector<std::string>::iterator& start);
 
 		/// @brief Changes variables in the expression tree into numbers
 		/// @param values Values of the variables
 		/// @param node Current node of the expression tree
-		void ConvertVarsToNumbers(std::map<std::string, double> values, BinaryTree<std::string>::Node* node);
+		void ConvertVarsToNumbers(std::map<std::string, double> values, ENode* node);
 
 		/// @brief Checks node's and it's childrens' values. If possible, simplifies it.
 		/// @param node Current node
 		/// @param parent Current node's parent
 		/// @exception std::overflow_error Thrown when there is invalid operation 
 		/// like dividing by zero, log(1,x) etc.
-		void SimplifyBinaryFunction(BinaryTree<std::string>::Node* node = nullptr, BinaryTree<std::string>::Node* parent = nullptr);
+		void SimplifyBinaryFunction(ENode* node = nullptr, ENode* parent = nullptr);
 
 		/// @brief If possible simplifies unary functions
 		/// @param node Current node
 		/// @param parent Current node's parent
 		/// @exception std::overflow_error Thrown when there is invalid operation 
 		/// like ln(-1) etc. 
-		void SimplifyUnaryFunction(BinaryTree<std::string>::Node* node = nullptr, BinaryTree<std::string>::Node* parent = nullptr);
+		void SimplifyUnaryFunction(ENode* node = nullptr, ENode* parent = nullptr);
 
 		/// @brief Checks whether the variable is in the list. If not - inserts it
 		/// @param var Var to handle
@@ -137,7 +138,7 @@ namespace expr
 		/// @param root_1 First tree's root
 		/// @param root_2 Seconds tree's root
 		/// @return True if the same data in the trees
-		bool Compare(BinaryTree<std::string>::Node* root_1, BinaryTree<std::string>::Node* root_2) const;
+		bool Compare(ENode* root_1, ENode* root_2) const;
 		
 		bool isNumber(std::string str) const;
 		bool isFunction(std::string str) const;
@@ -145,14 +146,14 @@ namespace expr
 
 		// Some functions for differentiation
 
-		void dSin(std::string var, BinaryTree<std::string>::Node*& sin_node);
-		void dCos(std::string var, BinaryTree<std::string>::Node*& cos_node);
-		void dTg(std::string var, BinaryTree<std::string>::Node*& tg_node);
-		void dLn(std::string var, BinaryTree<std::string>::Node*& ln_node);
-		void dLog(std::string var, BinaryTree<std::string>::Node*& log_node);
-		void dPow(std::string var, BinaryTree<std::string>::Node*& pow_node);
-		void dMult(std::string var, BinaryTree<std::string>::Node*& mult_node);
-		void dDiv(std::string var, BinaryTree<std::string>::Node*& div_node);
+		void dSin(std::string var, ENode*& sin_node);
+		void dCos(std::string var, ENode*& cos_node);
+		void dTg(std::string var, ENode*& tg_node);
+		void dLn(std::string var, ENode*& ln_node);
+		void dLog(std::string var, ENode*& log_node);
+		void dPow(std::string var, ENode*& pow_node);
+		void dMult(std::string var, ENode*& mult_node);
+		void dDiv(std::string var, ENode*& div_node);
 	};
 
 }
