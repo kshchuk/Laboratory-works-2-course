@@ -50,6 +50,7 @@ namespace list_1
                 return deque[back];
             }
         }
+
         public T PeekFront()
         {
             if (isEmpty())
@@ -57,6 +58,7 @@ namespace list_1
             else
                 return deque[front];
         }
+
         public T PopBack()
         {
             if (isEmpty())
@@ -68,6 +70,7 @@ namespace list_1
                 return data;
             }
         }
+
         public T PopFront()
         {
             if (isEmpty())
@@ -79,6 +82,7 @@ namespace list_1
                 return data;
             }
         }
+
         public void PushBack(T item)
         {
             if (Count >= size)
@@ -89,6 +93,7 @@ namespace list_1
                 Count++;
             }
         }
+
         public void PushFront(T item)
         {
             if (Count >= size)

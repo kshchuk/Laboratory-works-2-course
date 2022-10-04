@@ -8,11 +8,40 @@ namespace list_1
 {
     interface IDeque<T>
     {
+
+        /// <summary>
+        /// Adds a new element at the end of the queue
+        /// </summary>
+        /// <param name="item"> Element to add</param>
         void PushBack(T item);
+        /// <summary>
+        /// Removes and returns the object at the end of the queue.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"> Thrown when the dequeue is empty </exception>
         T PopBack();
+        /// <summary>
+        /// Adds a new element at the beginning of the queue
+        /// </summary>
+        /// <param name="item"> Element to add</param>
         void PushFront(T item);
+        /// <summary>
+        /// Removes and returns the object at the beginning of the queue.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"> Thrown when the dequeue is empty </exception>
         T PopFront();
+        /// <summary>
+        /// Returns the object at the end of the queue without removing it.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"> Thrown when the dequeue is empty </exception>
         T PeekBack();
+        /// <summary>
+        /// Returns the object at the beginning of the queue without removing it.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"> Thrown when the dequeue is empty </exception>
         T PeekFront();
         bool isEmpty();
     }

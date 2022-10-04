@@ -24,10 +24,12 @@ namespace list_1
         void Push(T item);
         /// <summary>
         /// Gets top element and removes him
+        /// <exception cref="InvalidOperationException"> Thrown when the stack is empty </exception>
         /// </summary>
         T Pop();
         /// <summary>
         /// Gets top element without removing him
+        /// <exception cref="InvalidOperationException"> Thrown when the stack is empty </exception>
         /// </summary>
         T Peek();
     }

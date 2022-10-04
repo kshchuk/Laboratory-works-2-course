@@ -17,6 +17,7 @@ namespace list_1
             this.end = null;
         }
 
+
         public T Dequeue()
         {
             if (isEmpty())

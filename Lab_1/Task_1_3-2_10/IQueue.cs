@@ -21,6 +21,7 @@ namespace list_1
         /// <summary>
         /// Removes and returns the object at the beginning of the queue
         /// </summary>
+        /// <exception cref="InvalidOperationException"> Thrown when the queue is empty </exception>
         /// <returns></returns>
         T Dequeue();
         /// <summary>
