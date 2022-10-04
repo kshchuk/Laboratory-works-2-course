@@ -132,6 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2-3Tree.hpp" />
+    <ClInclude Include="23TreePriorityQueue.hpp" />
     <ClInclude Include="ArrayPriorityQueue.hpp" />
     <ClInclude Include="AVLPriorityQueue.hpp" />
     <ClInclude Include="AVLTree.hpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="Expression.h" />
     <ClInclude Include="item.h" />
     <ClInclude Include="LinkedListPriorityQueue.hpp" />
+    <ClInclude Include="menu.hpp" />
     <ClInclude Include="priority_queue.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
