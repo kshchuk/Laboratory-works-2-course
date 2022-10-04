@@ -34,6 +34,8 @@ namespace expr
 
 		BinaryTree() : root(nullptr) {}		
 
+		~BinaryTree();
+
 		/// @brief Deletes selected node. In order not to break the connectivity of the tree,
 		///  connects node's parent node with node's child node.
 		/// @param parent Node's parent

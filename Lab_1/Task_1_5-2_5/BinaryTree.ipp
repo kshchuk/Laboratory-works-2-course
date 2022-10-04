@@ -59,6 +59,14 @@ namespace expr
 		}
 	}
 
+	template<typename T>
+	inline BinaryTree<T>::~BinaryTree()
+	{
+		this->Clear();
+		delete root;
+		root = nullptr;
+	}
+
 #ifdef _DEBUG
 
 	TEST_CASE("Delete node") {
