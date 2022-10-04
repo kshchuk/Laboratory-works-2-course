@@ -17,6 +17,27 @@
 namespace expr
 {
 	template<typename T>
+	inline void BinaryTree<T>::DeleteNode(Node* parent, Node* node, Node* child)
+	{
+		if (parent == nullptr)
+		{
+			this->root = child;
+			delete node;
+		}
+		else if (parent->left == node) {
+			Node* temp = child;
+			delete node;
+			parent->left = temp;
+		}
+		else {
+			Node* temp = child;
+			delete node;
+			parent->right = temp;
+		}
+	}
+
+
+	template<typename T>
 	inline void BinaryTree<T>::Clear(Node* node)
 	{
 		if (node == nullptr)
@@ -35,26 +56,6 @@ namespace expr
 			Clear(node->right);
 			delete node->right;
 			node->right = nullptr;
-		}
-	}
-
-	template<typename T>
-	inline void BinaryTree<T>::DeleteNode(Node* parent, Node* node, Node* child)
-	{
-		if (parent == nullptr)
-		{
-			this->root = child;
-			delete node;
-		}
-		else if (parent->left == node) {
-			Node* temp = child;
-			delete node;
-			parent->left = temp;
-		}
-		else {
-			Node* temp = child;
-			delete node;
-			parent->right = temp;
 		}
 	}
 

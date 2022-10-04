@@ -21,19 +21,19 @@ namespace expr
 {
     Expression::Expression(const Expression& expr)
     {
-        this->root = expr.Copy(expr.root);
+        this->tree.root = expr.tree.Copy(expr.tree.root);
         this->vars = expr.get_vars();
     }
 
     Expression::~Expression()
     {
-        this->Clear();
+        this->tree.Clear();
     }
 
     /// @brief Parses expression into RPN (reverse polish notation),
     ///  then fill it in binary tree
     /// @param expression Expression to handle
-    Expression::Expression(std::string expression) : BinaryTree()
+    Expression::Expression(std::string expression)
     {
         std::vector<std::string> rpn;
         try {
@@ -41,7 +41,7 @@ namespace expr
             std::reverse(rpn.begin(), rpn.end());
 
             std::vector<std::string>::iterator start = rpn.begin();
-            GenSubTree(&this->root, start);
+            GenSubTree(&this->tree.root, start);
         }
         catch (std::runtime_error& e) {
             std::cout << "Runtime error occured:\n " << e.what() << std::endl;
@@ -53,22 +53,22 @@ namespace expr
     /// @param expression New data
     void Expression::LoadExpression(std::string expression) 
     {
-        this->Clear(root);
-        delete root;
+        this->tree.Clear(tree.root);
+        delete tree.root;
 
         new (this) Expression(expression);
     }
 
-    Expression::Expression(Node* expr) {
-        this->root = expr;
+    Expression::Expression(BinaryTree<std::string>::Node* expr) {
+        this->tree.root = expr;
     }
 
-    std::string Expression::to_string(Node* node) const
+    std::string Expression::to_string(BinaryTree<std::string>::Node* node) const
     {
-        if (root == nullptr)
+        if (tree.root == nullptr)
             return std::string("");
         if (node == nullptr)
-            node = root;
+            node = tree.root;
 
         if (isFunction(node->data)) {
             if (isUnaryFunction(node->data))
@@ -87,8 +87,8 @@ namespace expr
 
     Expression& Expression::operator=(const Expression& expr)
     {
-        this->Clear();
-        this->root = expr.Copy(expr.root);
+        this->tree.Clear();
+        this->tree.root = expr.tree.Copy(expr.tree.root);
         this->vars = expr.get_vars();
         return *this;
     }
@@ -219,24 +219,24 @@ namespace expr
         return kFunctionsPriorities.at(str) == 1;
     }
 
-    void Expression::GenSubTree(Node** node, std::vector<std::string>::iterator& cur)
+    void Expression::GenSubTree(BinaryTree<std::string>::Node** node, std::vector<std::string>::iterator& cur)
     {
         if (isFunction(*cur))
         {
-            *node = new Node(std::string(*cur));
+            *node = new BinaryTree<std::string>::Node(std::string(*cur));
             std::vector<std::string>::iterator funct = cur;
             GenSubTree(&(*node)->right, ++cur);
             if (!isUnaryFunction(*funct))
                 GenSubTree(&(*node)->left, ++cur);
         }
         else {
-            *node = new Node(std::string(*cur));
+            *node = new BinaryTree<std::string>::Node(std::string(*cur));
             if (!isNumber(*cur))
                 CheckVar(*cur);
         }
     }
 
-    bool Expression::Compare(Node* node_1, Node* node_2) const
+    bool Expression::Compare(BinaryTree<std::string>::Node* node_1, BinaryTree<std::string>::Node* node_2) const
     {
         if (!node_1 && !node_2)
             return true;
@@ -261,42 +261,42 @@ namespace expr
                 return false;
     }
 
-    void Expression::dCos(std::string var, Node*& cos_node)
+    void Expression::dCos(std::string var, BinaryTree<std::string>::Node*& cos_node)
     {
-        Node* mult = new Node(std::string("*"));
+        BinaryTree<std::string>::Node* mult = new BinaryTree<std::string>::Node(std::string("*"));
 
-        Node* diff = new Node(std::string("-"));
-        Node* dCos = new Node(std::string("sin"));
-        dCos->right = Copy(cos_node->right);
-        diff->left = new Node(std::string("0"));
+        BinaryTree<std::string>::Node* diff = new BinaryTree<std::string>::Node(std::string("-"));
+        BinaryTree<std::string>::Node* dCos = new BinaryTree<std::string>::Node(std::string("sin"));
+        dCos->right = tree.Copy(cos_node->right);
+        diff->left = new BinaryTree<std::string>::Node(std::string("0"));
         diff->right = dCos;
         mult->left = diff;
         mult->right = Differentiate(var, cos_node->right);
         *cos_node = *mult;
     }
 
-    void Expression::dSin(std::string var, Node*& sin_node)
+    void Expression::dSin(std::string var, BinaryTree<std::string>::Node*& sin_node)
     {
-        Node* mult = new Node(std::string("*"));
-        Node* dSin = new Node(std::string("cos"));
-        dSin->right = Copy(sin_node->right);
+        BinaryTree<std::string>::Node* mult = new BinaryTree<std::string>::Node(std::string("*"));
+        BinaryTree<std::string>::Node* dSin = new BinaryTree<std::string>::Node(std::string("cos"));
+        dSin->right = tree.Copy(sin_node->right);
         mult->left = dSin;
         mult->right = Differentiate(var, sin_node->right);
 
         *sin_node = *mult;
     }
 
-    void Expression::dLog(std::string var, Node*& log_node)
+    void Expression::dLog(std::string var, BinaryTree<std::string>::Node*& log_node)
     {
-        Node* mult = new Node(std::string("*"));
+        BinaryTree<std::string>::Node* mult = new BinaryTree<std::string>::Node(std::string("*"));
 
-        Node* div = new Node(std::string("/"));
-        Node* multInDenominator = new Node(std::string("*"));
-        Node* lnA = new Node(std::string("ln"));
-        lnA->right = Copy(log_node->left);
-        multInDenominator->left = Copy(log_node->right);
+        BinaryTree<std::string>::Node* div = new BinaryTree<std::string>::Node(std::string("/"));
+        BinaryTree<std::string>::Node* multInDenominator = new BinaryTree<std::string>::Node(std::string("*"));
+        BinaryTree<std::string>::Node* lnA = new BinaryTree<std::string>::Node(std::string("ln"));
+        lnA->right = tree.Copy(log_node->left);
+        multInDenominator->left = tree.Copy(log_node->right);
         multInDenominator->right = lnA;
-        div->left = new Node(std::string("1"));
+        div->left = new BinaryTree<std::string>::Node(std::string("1"));
         div->right = multInDenominator;
 
         mult->left = div;
@@ -305,18 +305,18 @@ namespace expr
         *log_node = *mult;
     }
 
-    void Expression::dPow(std::string var, Node*& pow_node)
+    void Expression::dPow(std::string var, BinaryTree<std::string>::Node*& pow_node)
     {
-        Node* mult = new Node(std::string("*"));
+        BinaryTree<std::string>::Node* mult = new BinaryTree<std::string>::Node(std::string("*"));
 
-        Node* dPow = new Node(std::string("*"));
-        dPow->left = Copy(pow_node->right);
+        BinaryTree<std::string>::Node* dPow = new BinaryTree<std::string>::Node(std::string("*"));
+        dPow->left = tree.Copy(pow_node->right);
 
-        Node* newPower = new Node(std::string("-"));
-        newPower->left = Copy(pow_node->right);
-        newPower->right = new Node(std::string("1"));
-        Node* newPow = new Node(std::string("^"));
-        newPow->left = Copy(pow_node->left);
+        BinaryTree<std::string>::Node* newPower = new BinaryTree<std::string>::Node(std::string("-"));
+        newPower->left = tree.Copy(pow_node->right);
+        newPower->right = new BinaryTree<std::string>::Node(std::string("1"));
+        BinaryTree<std::string>::Node* newPow = new BinaryTree<std::string>::Node(std::string("^"));
+        newPow->left = tree.Copy(pow_node->left);
         newPow->right = newPower;
         dPow->right = newPow;
 
@@ -326,30 +326,30 @@ namespace expr
         *pow_node = *mult;
     }
 
-    void Expression::dLn(std::string var, Node*& ln_node)
+    void Expression::dLn(std::string var, BinaryTree<std::string>::Node*& ln_node)
     {
-        Node* mult = new Node(std::string("*"));
+        BinaryTree<std::string>::Node* mult = new BinaryTree<std::string>::Node(std::string("*"));
 
-        Node* divide = new Node(std::string("/"));
-        divide->left = new Node(std::string("1"));
-        divide->right = Copy(ln_node->right);
+        BinaryTree<std::string>::Node* divide = new BinaryTree<std::string>::Node(std::string("/"));
+        divide->left = new BinaryTree<std::string>::Node(std::string("1"));
+        divide->right = tree.Copy(ln_node->right);
         mult->left = divide;
         mult->right = Differentiate(var, ln_node->right);
 
         *ln_node = *mult;
     }
 
-    void Expression::dTg(std::string var, Node*& tg_node)
+    void Expression::dTg(std::string var, BinaryTree<std::string>::Node*& tg_node)
     {
-        Node* mult = new Node(std::string("*"));
+        BinaryTree<std::string>::Node* mult = new BinaryTree<std::string>::Node(std::string("*"));
 
-        Node* divide = new Node(std::string("/"));
-        Node* power = new Node(std::string("^"));
-        Node* cos = new Node(std::string("cos"));
-        cos->right = Copy(tg_node->right);
+        BinaryTree<std::string>::Node* divide = new BinaryTree<std::string>::Node(std::string("/"));
+        BinaryTree<std::string>::Node* power = new BinaryTree<std::string>::Node(std::string("^"));
+        BinaryTree<std::string>::Node* cos = new BinaryTree<std::string>::Node(std::string("cos"));
+        cos->right = tree.Copy(tg_node->right);
         power->left = cos;
-        power->right = new Node(std::string("2"));
-        divide->left = new Node(std::string("1"));
+        power->right = new BinaryTree<std::string>::Node(std::string("2"));
+        divide->left = new BinaryTree<std::string>::Node(std::string("1"));
         divide->right = power;
         mult->left = divide;
         mult->right = Differentiate(var, tg_node->right);
@@ -357,10 +357,10 @@ namespace expr
         *tg_node = *mult;
     }
 
-    Expression::Node* Expression::Differentiate(std::string var, Node* node)
+    BinaryTree<std::string>::Node* Expression::Differentiate(std::string var, BinaryTree<std::string>::Node* node)
     {
         if (node == nullptr)
-            node = root;
+            node = tree.root;
 
         this->Simplify(node);
 
@@ -397,35 +397,35 @@ namespace expr
         return node;
     }
 
-    void Expression::dDiv(std::string var, Node*& div_node)
+    void Expression::dDiv(std::string var, BinaryTree<std::string>::Node*& div_node)
     {
-        Node* div = new Node(std::string("/"));
+        BinaryTree<std::string>::Node* div = new BinaryTree<std::string>::Node(std::string("/"));
 
-        Node* numerator = new Node(std::string("-")), * denominator = new Node(std::string("^"));
-        Node* toReduce = new Node(std::string("*")), * subtractor = new Node(std::string("*"));
-        toReduce->left = Copy(div_node->left);
-        subtractor->right = Copy(div_node->right);
-        denominator->left = Copy(div_node->right);
+        BinaryTree<std::string>::Node* numerator = new BinaryTree<std::string>::Node(std::string("-")), * denominator = new BinaryTree<std::string>::Node(std::string("^"));
+        BinaryTree<std::string>::Node* toReduce = new BinaryTree<std::string>::Node(std::string("*")), * subtractor = new BinaryTree<std::string>::Node(std::string("*"));
+        toReduce->left = tree.Copy(div_node->left);
+        subtractor->right = tree.Copy(div_node->right);
+        denominator->left = tree.Copy(div_node->right);
         toReduce->right = Differentiate(var, div_node->right);
         subtractor->left = Differentiate(var, div_node->left);
         numerator->left = toReduce;
         numerator->right = subtractor;
-        denominator->right = new Node(std::string("2"));
+        denominator->right = new BinaryTree<std::string>::Node(std::string("2"));
         div->left = numerator;
         div->right = denominator;
 
         *div_node = *div;
     }
 
-    void Expression::dMult(std::string var, Node*& mult_node)
+    void Expression::dMult(std::string var, BinaryTree<std::string>::Node*& mult_node)
     {
-        Node* sum = new Node(std::string("+"));
+        BinaryTree<std::string>::Node* sum = new BinaryTree<std::string>::Node(std::string("+"));
 
-        Node* dod_1 = new Node(std::string("*")),
-            * dod_2 = new Node(std::string("*"));
+        BinaryTree<std::string>::Node* dod_1 = new BinaryTree<std::string>::Node(std::string("*")),
+            * dod_2 = new BinaryTree<std::string>::Node(std::string("*"));
 
-        dod_1->left = Copy(mult_node->left);
-        dod_2->right = Copy(mult_node->right);
+        dod_1->left = tree.Copy(mult_node->left);
+        dod_2->right = tree.Copy(mult_node->right);
         dod_1->right = Differentiate(var, mult_node->right);
         dod_2->left = Differentiate(var, mult_node->left);
         sum->left = dod_1;
@@ -472,10 +472,10 @@ namespace expr
         else return arg_1;
     }
 
-    void Expression::Simplify(Node* node, Node* parent)
+    void Expression::Simplify(BinaryTree<std::string>::Node* node, BinaryTree<std::string>::Node* parent)
     {
         if (node == nullptr)
-            node = root;
+            node = tree.root;
 
         try {
             if (isFunction(node->data))
@@ -493,7 +493,7 @@ namespace expr
         }
     }
 
-    void Expression::SimplifyBinaryFunction(Node* node, Node* parent)
+    void Expression::SimplifyBinaryFunction(BinaryTree<std::string>::Node* node, BinaryTree<std::string>::Node* parent)
     {
         if (!isNumber(node->right->data)) {
             Simplify(node->right, node);
@@ -505,7 +505,7 @@ namespace expr
         {
             node->data = std::to_string(CalculateFunction(node->data,
                 std::stod(node->left->data), std::stod(node->right->data)));
-            Clear(node);
+            tree.Clear(node);
         }
         else {
             // Check all possible combinations to simplify expression
@@ -514,10 +514,10 @@ namespace expr
             {
                 if (node->data == "+") {
                     delete node->left;
-                    DeleteNode(parent, node, node->right);
+                    this->tree.DeleteNode(parent, node, node->right);
                 }
                 else if (node->data == "*" || node->data == "/" || node->data == "^") {
-                    Clear(node);
+                    tree.Clear(node);
                     node->data = std::string("0");
                 }
             }
@@ -525,14 +525,14 @@ namespace expr
             {
                 if (node->data == "+" || node->data == "-") {
                     delete node->right;
-                    DeleteNode(parent, node, node->left);
+                    this->tree.DeleteNode(parent, node, node->left);
                 }
                 else if (node->data == "*") {
-                    Clear(node);
+                    tree.Clear(node);
                     node->data = std::string("0");
                 }
                 else if (node->data == "^") {
-                    Clear(node);
+                    tree.Clear(node);
                     node->data = std::string("1");
                 }
             }
@@ -540,10 +540,10 @@ namespace expr
             {
                 if (node->data == "*") {
                     delete node->left;
-                    DeleteNode(parent, node, node->right);
+                    this->tree.DeleteNode(parent, node, node->right);
                 }
                 else if (node->data == "^") {
-                    Clear(node);
+                    tree.Clear(node);
                     node->data = std::string("1");
                 }
             }
@@ -551,35 +551,35 @@ namespace expr
             {
                 if (node->data == "*" || node->data == "/" || node->data == "^") {
                     delete node->right;
-                    DeleteNode(parent, node, node->left);
+                    this->tree.DeleteNode(parent, node, node->left);
                 }
                 else if (node->data == "log") {
-                    Clear(node);
+                    tree.Clear(node);
                     node->data = std::string("0");
                 }
             }
             else
                 if (!isNumber(node->left->data) && !isNumber(node->right->data) && node->data == "-") {
                     if (Compare(node->left, node->right)) {
-                        Clear(node);
+                        tree.Clear(node);
                         node->data = std::string("0");
                     }
                 }
         }
     }
     
-    void Expression::SimplifyUnaryFunction(Node* node, Node* parent)
+    void Expression::SimplifyUnaryFunction(BinaryTree<std::string>::Node* node, BinaryTree<std::string>::Node* parent)
     {
         if (!isNumber(node->right->data)) {
             Simplify(node->right, node);
         }
         if (isNumber(node->right->data)) {
             node->data = std::to_string(CalculateFunction(node->data, std::stod(node->right->data)));
-            Clear(node);
+            tree.Clear(node);
         }
     }
 
-    void Expression::ConvertVarsToNumbers(std::map<std::string, double> values, Node* node)
+    void Expression::ConvertVarsToNumbers(std::map<std::string, double> values, BinaryTree<std::string>::Node* node)
     {
         if (!node)
             return;
@@ -593,11 +593,11 @@ namespace expr
 
     double Expression::CalculateExpression(std::map<std::string, double> variables_values) const
     {
-        Expression* temp = new Expression(Copy(this->root));
-        temp->ConvertVarsToNumbers(variables_values, temp->root);
+        Expression* temp = new Expression(tree.Copy(this->tree.root));
+        temp->ConvertVarsToNumbers(variables_values, temp->tree.root);
         temp->Simplify();
-        double res = std::stod(temp->root->data);
-        temp->Clear(temp->root);
+        double res = std::stod(temp->tree.root->data);
+        temp->tree.Clear(temp->tree.root);
         delete temp;
         return res;
     }
@@ -691,9 +691,9 @@ namespace expr
     {
         Expression e;
 
-        BinaryTree<std::string>::Node* node1 = new BinaryTree<std::string>::Node("+");
-        node1->left = new BinaryTree<std::string>::Node("10"),
-        node1->right = new BinaryTree<std::string>::Node("-12");
+        BinaryTree<std::string>::BinaryTree<std::string>::Node* node1 = new BinaryTree<std::string>::BinaryTree<std::string>::Node("+");
+        node1->left = new BinaryTree<std::string>::BinaryTree<std::string>::Node("10"),
+        node1->right = new BinaryTree<std::string>::BinaryTree<std::string>::Node("-12");
 
             
         e.SimplifyBinaryFunction(node1);
@@ -705,10 +705,10 @@ namespace expr
 
         node1->data = "-"; node1->left->data = "x"; node1->right->data = "0";
         e.SimplifyBinaryFunction(node1);
-        CHECK(e.root->data == "x");
+        CHECK(e.tree.root->data == "x");
 
-        node1 = new BinaryTree<std::string>::Node(); node1->left = new BinaryTree<std::string>::Node();
-        node1->right = new BinaryTree<std::string>::Node();
+        node1 = new BinaryTree<std::string>::BinaryTree<std::string>::Node(); node1->left = new BinaryTree<std::string>::BinaryTree<std::string>::Node();
+        node1->right = new BinaryTree<std::string>::BinaryTree<std::string>::Node();
         node1->data = "log"; node1->left->data = "1"; node1->right->data = "10";
         CHECK_THROWS_AS(e.SimplifyBinaryFunction(node1), const std::overflow_error&);
     }
@@ -717,8 +717,8 @@ namespace expr
     {
         Expression e;
 
-        BinaryTree<std::string>::Node* node1 = new BinaryTree<std::string>::Node("sin");
-        node1->right = new BinaryTree<std::string>::Node("0");
+        BinaryTree<std::string>::BinaryTree<std::string>::Node* node1 = new BinaryTree<std::string>::BinaryTree<std::string>::Node("sin");
+        node1->right = new BinaryTree<std::string>::BinaryTree<std::string>::Node("0");
 
         e.SimplifyUnaryFunction(node1);
         CHECK(stod(node1->data) == 0);

@@ -12,14 +12,6 @@
 
 #pragma once
 
-#include <map>
-
- // For unit testing of private methods
-#ifdef _DEBUG
-#define private public
-#define protected public
-#endif
-
 
 namespace expr
 {
@@ -28,7 +20,7 @@ namespace expr
 	template <typename T>
 	class BinaryTree
 	{
-	protected:
+	public:
 		struct Node
 		{
 			T data;
@@ -65,16 +57,11 @@ namespace expr
 			return new_node;
 		}
 
-	public:
-
 		/// @brief Deletes all nodes of the tree except the tree's root
 		/// @param root Root of the tree to delete 
-		void Clear(Node* root = nullptr);
+		void Clear(Node* node = nullptr);
 	};
 }
 
-
-#undef private
-#undef protected
 
 #include "BinaryTree.ipp"
