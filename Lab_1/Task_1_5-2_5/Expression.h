@@ -33,18 +33,19 @@ namespace expr
 	class Expression : public BinaryTree<std::string>
 	{
 	public:
+		/// @exception std::runtime_error Thrown when there is invalid input in the expression
 		Expression() : BinaryTree() {};
+		Expression(const Expression&);
 
-		/// @brief Creates binary tree based on expression
+		~Expression();
+
+		/// @brief Creates binary tree based of the expression
 		/// @param expression 
 		Expression(std::string expression);
 
 		/// @brief Load expression into Expression class 
 		/// @param expression 
 		void LoadExpression(std::string expression);
-
-		/// @brief Prints all vars presented in the expression
-		void PrintVarList() const;
 
 		/// @brief Simplifies expression
 		/// @param node Starting node
@@ -67,6 +68,10 @@ namespace expr
 		/// @param node Current node of the expression tree<
 		/// @return Expression as string
 		std::string to_string(Node* node = nullptr) const; 
+
+		std::vector<std::string> get_vars() const;
+
+		Expression& operator=(const Expression &expr);
 
 	private:
 		Expression(Node*);

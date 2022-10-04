@@ -19,6 +19,17 @@
 
 namespace expr
 {
+    Expression::Expression(const Expression& expr)
+    {
+        this->root = expr.Copy(expr.root);
+        this->vars = expr.get_vars();
+    }
+
+    Expression::~Expression()
+    {
+        this->Clear();
+    }
+
     /// @brief Parses expression into RPN (reverse polish notation),
     ///  then fill it in binary tree
     /// @param expression Expression to handle
@@ -27,14 +38,15 @@ namespace expr
         std::vector<std::string> rpn;
         try {
             rpn = GenRpn(expression);
+            std::reverse(rpn.begin(), rpn.end());
+
+            std::vector<std::string>::iterator start = rpn.begin();
+            GenSubTree(&this->root, start);
         }
         catch (std::runtime_error& e) {
-            std::cout << "Runtime error occured:\n " << e.what();
+            std::cout << "Runtime error occured:\n " << e.what() << std::endl;
+            throw std::runtime_error(" ");
         }
-
-        std::reverse(rpn.begin(), rpn.end());
-        std::vector<std::string>::iterator start = rpn.begin();
-        GenSubTree(&this->root, start);
     }
 
     /// @brief Delete previous data and create new Expression
@@ -66,6 +78,19 @@ namespace expr
         }
         else
             return node->data;
+    }
+
+    std::vector<std::string> Expression::get_vars() const
+    {
+        return vars;
+    }
+
+    Expression& Expression::operator=(const Expression& expr)
+    {
+        this->Clear();
+        this->root = expr.Copy(expr.root);
+        this->vars = expr.get_vars();
+        return *this;
     }
 
     void Expression::ProcessOperation(std::string function, 
@@ -286,6 +311,7 @@ namespace expr
 
         Node* dPow = new Node(std::string("*"));
         dPow->left = Copy(pow_node->right);
+
         Node* newPower = new Node(std::string("-"));
         newPower->left = Copy(pow_node->right);
         newPower->right = new Node(std::string("1"));
@@ -331,16 +357,12 @@ namespace expr
         *tg_node = *mult;
     }
 
-    void Expression::PrintVarList() const
-    {
-        for (auto var : vars)
-            std::cout << var << ", ";
-    }
-
     Expression::Node* Expression::Differentiate(std::string var, Node* node)
     {
         if (node == nullptr)
             node = root;
+
+        this->Simplify(node);
 
         if (node->data == var) {
             node->data = std::string("1");
@@ -372,7 +394,6 @@ namespace expr
                 Differentiate(var, node->right);
             }
         }
-        this->Simplify(node);
         return node;
     }
 
@@ -610,18 +631,22 @@ namespace expr
     {
         Expression e("(x-x)+2");
         e.Differentiate(std::string("x"));
+        e.Simplify();
         CHECK(stod(e.to_string()) == 0);
 
         e.LoadExpression("x^2");
         e.Differentiate(std::string("x"));
+        e.Simplify();
         CHECK(e.to_string() == "(2)*(x)");
 
         e.LoadExpression("sin(x)");
         e.Differentiate(std::string("x"));
+        e.Simplify();
         CHECK(e.to_string() == "cos(x)");
 
         e.LoadExpression("x^ln(x)");
         e.Differentiate(std::string("x"));
+        e.Simplify();
         CHECK(e.to_string() == "(ln(x))*((x)^((ln(x))-(1)))");
     }
 
