@@ -8,6 +8,11 @@ namespace list_2
 {
     public class BooksSerie
     {
-        public List<Book> Serie { get; set; }
+        public List<Book> Serie { get; private set; }
+        public void AddToSerie(Book book)
+        {
+            Serie.Add(book);
+            Serie.Sort();
+        }
     }
 }
