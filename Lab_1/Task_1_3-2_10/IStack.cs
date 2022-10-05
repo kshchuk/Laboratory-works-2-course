@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace list_1
 {
-    interface IStack<T>
+    public interface IStack<T>
     {
         /// <summary>
         /// Deletes all elements
@@ -20,6 +20,7 @@ namespace list_1
         /// <summary>
         /// Inserts an object as the top element of the stack
         /// </summary>
+        /// <exception cref="OverflowException"> Thrown when the stack is full </exception>
         /// <param name="item"></param>
         void Push(T item);
         /// <summary>

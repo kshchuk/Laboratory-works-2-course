@@ -50,7 +50,7 @@ namespace list_1
         public T Peek()
         {
             if (isEmpty())
-                throw new Exception("Stack is empty");
+                throw new InvalidOperationException("Stack is empty");
             else
             {
                 return stack[Top];
@@ -71,7 +71,7 @@ namespace list_1
             if (Count >= size)
                 throw new OverflowException("Stack overflow");
             stack[++Top % size] = item;
-            Top++;
+            //Top++;
             Count++;
         }
     }

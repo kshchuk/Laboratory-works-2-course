@@ -51,7 +51,7 @@ namespace list_1
                 end = node;
             }
         }
-        public bool isEmpty() => front != null;
+        public bool isEmpty() => front == null;
         public T Peek()
         {
             if (isEmpty())

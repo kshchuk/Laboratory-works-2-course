@@ -13,6 +13,7 @@ namespace list_1
         /// Adds a new element at the end of the queue
         /// </summary>
         /// <param name="item"> Element to add</param>
+        /// <exception cref="OverflowException"> Thrown when the dequeue is full </exception>
         void PushBack(T item);
         /// <summary>
         /// Removes and returns the object at the end of the queue.
@@ -43,6 +44,7 @@ namespace list_1
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"> Thrown when the dequeue is empty </exception>
         T PeekFront();
+
         bool isEmpty();
     }
 }

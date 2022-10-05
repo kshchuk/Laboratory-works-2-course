@@ -17,6 +17,7 @@ namespace list_1
         /// Adds a new element to the end of the queue
         /// </summary>
         /// <param name="item"> Element to add</param>
+        /// <exception cref="OverflowException"> Thrown when the queue is full </exception>
         void Enqueue(T item);
         /// <summary>
         /// Removes and returns the object at the beginning of the queue
