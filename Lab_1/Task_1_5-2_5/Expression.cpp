@@ -21,7 +21,6 @@ namespace expr
 {
     Expression::Expression(const Expression& expr)
     {
-        this->tree.Clear();
         this->tree.root = expr.tree.Copy(expr.tree.root);
         this->vars = expr.get_vars();
     }
