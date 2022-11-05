@@ -362,3 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /Lab_1/tester_sharp
+/Lab_2/OfflineFileManager/all5depth.fsh
