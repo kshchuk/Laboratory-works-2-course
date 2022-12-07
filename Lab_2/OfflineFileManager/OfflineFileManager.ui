@@ -14,7 +14,7 @@
    <string>OfflineFileManager</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -120,7 +120,13 @@ image: url(:/OfflineFileManager/res/icons/172546_search_icon.png);</string>
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
     <addaction name="separator"/>
-    <addaction name="actionClose"/>
+    <addaction name="actionUpdate"/>
+    <addaction name="actionCreate_Virtual_Folder"/>
+    <addaction name="actionReturn_Home"/>
+    <addaction name="actionReturn_Upper"/>
+    <addaction name="actionSearch"/>
+    <addaction name="separator"/>
+    <addaction name="actionClose_3"/>
    </widget>
    <widget class="QMenu" name="menuConfiguration">
     <property name="title">
@@ -135,18 +141,7 @@ image: url(:/OfflineFileManager/res/icons/172546_search_icon.png);</string>
     </widget>
     <addaction name="menuRegime"/>
     <addaction name="actionMaximum_depth"/>
-   </widget>
-   <widget class="QMenu" name="menuNetwork">
-    <property name="title">
-     <string>Network</string>
-    </property>
-    <widget class="QMenu" name="menuConnect">
-     <property name="title">
-      <string>Connect</string>
-     </property>
-     <addaction name="actionGoogle_Drive"/>
-    </widget>
-    <addaction name="menuConnect"/>
+    <addaction name="actionSet_Filter"/>
    </widget>
    <widget class="QMenu" name="menuUtils">
     <property name="title">
@@ -156,7 +151,6 @@ image: url(:/OfflineFileManager/res/icons/172546_search_icon.png);</string>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuConfiguration"/>
-   <addaction name="menuNetwork"/>
    <addaction name="menuUtils"/>
   </widget>
   <action name="actionClose">
@@ -212,6 +206,46 @@ image: url(:/OfflineFileManager/res/icons/172546_search_icon.png);</string>
   <action name="actionrobocopy">
    <property name="text">
     <string>robocopy</string>
+   </property>
+  </action>
+  <action name="actionUpdate">
+   <property name="text">
+    <string>Update</string>
+   </property>
+  </action>
+  <action name="actionCreate_Virtual_Folder">
+   <property name="text">
+    <string>Create Virtual Folder</string>
+   </property>
+  </action>
+  <action name="actionReturn_Home">
+   <property name="text">
+    <string>Return Home</string>
+   </property>
+  </action>
+  <action name="actionReturn_Upper">
+   <property name="text">
+    <string>Return Upper</string>
+   </property>
+  </action>
+  <action name="actionClose_2">
+   <property name="text">
+    <string>Close</string>
+   </property>
+  </action>
+  <action name="actionSet_Filter">
+   <property name="text">
+    <string>Set Filter</string>
+   </property>
+  </action>
+  <action name="actionSearch">
+   <property name="text">
+    <string>Search</string>
+   </property>
+  </action>
+  <action name="actionClose_3">
+   <property name="text">
+    <string>Close</string>
    </property>
   </action>
  </widget>
