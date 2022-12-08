@@ -19,7 +19,7 @@
 
 #include "PropertiesWindow.h"
 #include "PropertiesLogic.h"
-#include "AddDataToFolder.h"
+#include "Selector.h"
 #include "SearchWindow.h"
 #include "GoogleGateway.h"
 #include "Robocopy.h"
@@ -189,14 +189,13 @@ void OfflineFileManager::action_Properties()
     layout->addWidget(buttonOk);
     widget->setLayout(layout);
     widget->show();
-
 }
 
 void OfflineFileManager::action_addDataToVirtualFolder()
 {
-    AddDataToFolder* dialog = new AddDataToFolder(this, model);
-    connect(dialog, &AddDataToFolder::infoSent, this, &OfflineFileManager::addDataToVirtualFolder);
-    connect(dialog, &AddDataToFolder::finished, dialog, &AddDataToFolder::close);
+    Selector* dialog = new Selector(this, model);
+    connect(dialog, &Selector::infoSent, this, &OfflineFileManager::addDataToVirtualFolder);
+    connect(dialog, &Selector::finished, dialog, &Selector::close);
     dialog->exec();
 }
 

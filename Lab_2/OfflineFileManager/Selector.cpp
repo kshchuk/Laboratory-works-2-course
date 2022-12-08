@@ -1,4 +1,4 @@
-#include "AddDataToFolder.h"
+#include "Selector.h"
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QScroller>
@@ -6,30 +6,32 @@
 #include <QMenu>
 
 
-AddDataToFolder::AddDataToFolder(QWidget *parent, QFileInfoModel* model)
+Selector::Selector(QWidget *parent, QFileInfoModel* model)
 	: QDialog(parent), model(model)
 {
 	ui.setupUi(this);
 
     MyTreeViewInit(ui.systemTree, model);
+
+    this->setFixedSize(this->size());
    
     ui.systemTree->setExpandsOnDoubleClick(true);
-    connect(ui.cancelButton, &QPushButton::clicked, this, &AddDataToFolder::finished);
-    connect(ui.okButton, &QPushButton::clicked, this, &AddDataToFolder::sendInfo);
-    connect(ui.okButton, &QPushButton::clicked, this, &AddDataToFolder::finished);
-    connect(ui.clearButton, &QPushButton::clicked, this, &AddDataToFolder::clearAll);
-    connect(ui.fromExplorerButton, &QPushButton::clicked, this, &AddDataToFolder::selectFromExplorer);
-    connect(ui.fileList, &QListWidget::customContextMenuRequested, this, &AddDataToFolder::on_customContextMenu);
-    connect(ui.systemTree, &QTreeView::customContextMenuRequested, this, &AddDataToFolder::on_customContextMenuForTree);
+    connect(ui.cancelButton, &QPushButton::clicked, this, &Selector::finished);
+    connect(ui.okButton, &QPushButton::clicked, this, &Selector::sendInfo);
+    connect(ui.okButton, &QPushButton::clicked, this, &Selector::finished);
+    connect(ui.clearButton, &QPushButton::clicked, this, &Selector::clearAll);
+    connect(ui.fromExplorerButton, &QPushButton::clicked, this, &Selector::selectFromExplorer);
+    connect(ui.fileList, &QListWidget::customContextMenuRequested, this, &Selector::on_customContextMenu);
+    connect(ui.systemTree, &QTreeView::customContextMenuRequested, this, &Selector::on_customContextMenuForTree);
 
     ui.fileList->setContextMenuPolicy(Qt::CustomContextMenu);
     ui.systemTree->setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
-AddDataToFolder::~AddDataToFolder()
+Selector::~Selector()
 {}
 
-void AddDataToFolder::selectFromExplorer()
+void Selector::selectFromExplorer()
 {
     QFileDialog dialog(this);
     dialog.setFileMode(QFileDialog::ExistingFiles);
@@ -38,7 +40,7 @@ void AddDataToFolder::selectFromExplorer()
     updateSelectedFromExplorer();
 }
 
-void AddDataToFolder::sendInfo()
+void Selector::sendInfo()
 {
     QModelIndexList list;
     foreach(auto elem, selected)
@@ -47,7 +49,7 @@ void AddDataToFolder::sendInfo()
     emit infoSent(list, selectedExternal);
 }
 
-void AddDataToFolder::clearAll()
+void Selector::clearAll()
 {
     selected.clear();
     selectedExternal.clear();
@@ -55,7 +57,7 @@ void AddDataToFolder::clearAll()
     ui.fileList->clear();
 }
 
-void AddDataToFolder::removeFromList()
+void Selector::removeFromList()
 {
     QModelIndex i = ui.fileList->currentIndex();
 
@@ -81,7 +83,7 @@ void AddDataToFolder::removeFromList()
     delete ui.fileList->itemFromIndex(i);
 }
 
-void AddDataToFolder::addToList()
+void Selector::addToList()
 {
     QModelIndex index = ui.systemTree->currentIndex();
     QString path = model->pathFromStringList(model->getPath(index));
@@ -90,25 +92,25 @@ void AddDataToFolder::addToList()
     updateSelectedFromExplorer();
 }
 
-void AddDataToFolder::on_customContextMenu(const QPoint& point)
+void Selector::on_customContextMenu(const QPoint& point)
 {
     QPoint globalPos = ui.fileList->mapToGlobal(point);
     QMenu menu(this);
     menu.addAction("Remove",
-        this, &AddDataToFolder::removeFromList);
+        this, &Selector::removeFromList);
     menu.exec(globalPos);
 }
 
-void AddDataToFolder::on_customContextMenuForTree(const QPoint& point)
+void Selector::on_customContextMenuForTree(const QPoint& point)
 {
     QPoint globalPos = ui.fileList->mapToGlobal(point);
     QMenu menu(this);
     menu.addAction("Select",
-        this, &AddDataToFolder::addToList);
+        this, &Selector::addToList);
     menu.exec(globalPos);
 }
 
-void AddDataToFolder::MyTreeViewInit(QTreeView* tree, QAbstractItemModel* model1)
+void Selector::MyTreeViewInit(QTreeView* tree, QAbstractItemModel* model1)
 {
     tree->setModel(model1);
 
@@ -125,7 +127,7 @@ void AddDataToFolder::MyTreeViewInit(QTreeView* tree, QAbstractItemModel* model1
     tree->setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
-void AddDataToFolder::updateSelectedFromExplorer()
+void Selector::updateSelectedFromExplorer()
 {
 
     ui.fileList->clear();

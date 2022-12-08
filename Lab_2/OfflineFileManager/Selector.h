@@ -5,13 +5,13 @@
 #include "QFileInfoModel.h"
 #include "ui_AddDataToFolder.h"
 
-class AddDataToFolder : public QDialog
+class Selector : public QDialog
 {
 	Q_OBJECT
 
 public:
-	AddDataToFolder(QWidget *parent = nullptr, QFileInfoModel* = nullptr);
-	~AddDataToFolder();
+	Selector(QWidget *parent = nullptr, QFileInfoModel* = nullptr);
+	~Selector();
 
 signals:
 	void infoSent(QModelIndexList, QStringList);
@@ -28,7 +28,7 @@ private slots:
 	void on_customContextMenuForTree(const QPoint& point);
 
 private:
-	Ui::AddDataToFolderClass ui;
+	Ui::SelectorClass ui;
 	QFileInfoModel* model;
 
 	QList<QPair<QModelIndex, QString>> selected;

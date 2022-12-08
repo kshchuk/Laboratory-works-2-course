@@ -96,14 +96,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <QtRcc Include="OfflineFileManager.qrc" />
-    <QtUic Include="AddDataToFolder.ui" />
+    <QtUic Include="Selector.ui" />
     <QtUic Include="OfflineFileManager.ui" />
     <QtMoc Include="OfflineFileManager.h" />
     <QtUic Include="Robocopy.ui" />
     <QtUic Include="SearchWindow.ui" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="AddDataToFolder.h" />
+    <QtMoc Include="Selector.h" />
     <QtMoc Include="archiever\libarchiveqt.h" />
     <ClInclude Include="archiever\Global.hpp" />
     <ClInclude Include="archiever\LibBZip2.hpp" />
@@ -124,7 +124,7 @@
     <ClInclude Include="system_depend_functions.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AddDataToFolder.cpp" />
+    <ClCompile Include="Selector.cpp" />
     <ClCompile Include="archiever\LibArchive.cpp" />
     <ClCompile Include="archiever\LibBZip2.cpp" />
     <ClCompile Include="archiever\LibGZip.cpp" />
