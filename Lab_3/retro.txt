@@ -1,0 +1,1 @@
+https://stackoverflow.com/questions/11238918/s-isreg-macro-undefined
