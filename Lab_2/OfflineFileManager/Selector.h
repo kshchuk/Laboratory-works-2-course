@@ -3,7 +3,7 @@
 #include <QDialog>
 #include <QFileIconProvider>
 #include "QFileInfoModel.h"
-#include "ui_AddDataToFolder.h"
+#include "ui_Selector.h"
 
 class Selector : public QDialog
 {
