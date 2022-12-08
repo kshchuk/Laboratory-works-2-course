@@ -92,6 +92,9 @@
     <QtMoc Include="archiever\libarchiveqt.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="Archiver.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="Selector.ui">
@@ -101,6 +104,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="Robocopy.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="Archiver.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
@@ -151,6 +157,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="archiever\LibBZip2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Archiver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

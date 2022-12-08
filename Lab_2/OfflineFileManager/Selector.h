@@ -28,7 +28,7 @@ private slots:
 	void on_customContextMenuForTree(const QPoint& point);
 
 private:
-	Ui::SelectorClass ui;
+	Ui::AddDataToFolderClass ui;
 	QFileInfoModel* model;
 
 	QList<QPair<QModelIndex, QString>> selected;

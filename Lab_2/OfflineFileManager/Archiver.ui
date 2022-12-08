@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ArchiverClass</class>
+ <widget class="QMainWindow" name="ArchiverClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>383</width>
+    <height>348</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Archiver</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>379</width>
+      <height>304</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QListWidget" name="listWidget"/>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QPushButton" name="pushButton_2">
+           <property name="text">
+            <string>Open Archive</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_4">
+           <property name="text">
+            <string>Unarchive Selected</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_6">
+           <property name="text">
+            <string>Unarchive All</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_7">
+         <property name="text">
+          <string>Clear</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QPushButton" name="pushButton">
+           <property name="text">
+            <string>Open Files</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_3">
+           <property name="text">
+            <string>Archive Selected</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_5">
+           <property name="text">
+            <string>Archive All</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>383</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen_Archive"/>
+    <addaction name="actionUnarchive_Selected"/>
+    <addaction name="actionUnarchive_All"/>
+    <addaction name="actionOpen_Files"/>
+    <addaction name="actionArchive_Selected"/>
+    <addaction name="actionArchive_All"/>
+    <addaction name="actionClear"/>
+   </widget>
+   <addaction name="menuFile"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionOpen_Archive">
+   <property name="text">
+    <string>Open Archive</string>
+   </property>
+  </action>
+  <action name="actionUnarchive_Selected">
+   <property name="text">
+    <string>Unarchive Selected</string>
+   </property>
+  </action>
+  <action name="actionUnarchive_All">
+   <property name="text">
+    <string>Unarchive All</string>
+   </property>
+  </action>
+  <action name="actionOpen_Files">
+   <property name="text">
+    <string>Open Files</string>
+   </property>
+  </action>
+  <action name="actionArchive_Selected">
+   <property name="text">
+    <string>Archive Selected</string>
+   </property>
+  </action>
+  <action name="actionArchive_All">
+   <property name="text">
+    <string>Archive All</string>
+   </property>
+  </action>
+  <action name="actionGzip">
+   <property name="text">
+    <string>Gzip</string>
+   </property>
+  </action>
+  <action name="actionBZip2">
+   <property name="text">
+    <string>BZip2</string>
+   </property>
+  </action>
+  <action name="actionLZMA2">
+   <property name="text">
+    <string>LZMA2</string>
+   </property>
+  </action>
+  <action name="actionLZip">
+   <property name="text">
+    <string>LZip</string>
+   </property>
+  </action>
+  <action name="actionLZ4">
+   <property name="text">
+    <string>LZ4</string>
+   </property>
+  </action>
+  <action name="actionCpio">
+   <property name="text">
+    <string>Cpio</string>
+   </property>
+  </action>
+  <action name="actionAR">
+   <property name="text">
+    <string>AR</string>
+   </property>
+  </action>
+  <action name="actionISO9660">
+   <property name="text">
+    <string>ISO9660</string>
+   </property>
+  </action>
+  <action name="actionPAX">
+   <property name="text">
+    <string>PAX</string>
+   </property>
+  </action>
+  <action name="actionShar">
+   <property name="text">
+    <string>Shar</string>
+   </property>
+  </action>
+  <action name="actionZip">
+   <property name="text">
+    <string>Zip</string>
+   </property>
+  </action>
+  <action name="action7Zip">
+   <property name="text">
+    <string>7Zip</string>
+   </property>
+  </action>
+  <action name="actionTar">
+   <property name="text">
+    <string>Tar</string>
+   </property>
+  </action>
+  <action name="actionClear">
+   <property name="text">
+    <string>Clear</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

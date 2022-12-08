@@ -1,4 +1,5 @@
 #include "OfflineFileManager.h"
+
 #include <QCommandLineParser>
 #include <QFileIconProvider>
 #include <QFileSystemModel>
@@ -23,6 +24,7 @@
 #include "SearchWindow.h"
 #include "GoogleGateway.h"
 #include "Robocopy.h"
+#include "Archiver.h"
 
 
 
@@ -66,6 +68,7 @@ OfflineFileManager::OfflineFileManager(QWidget *parent)
     connect(ui.actionSearch, &QAction::triggered, this, &OfflineFileManager::search);
     //connect(ui.actionGoogle_Drive, &QAction::triggered, this, &OfflineFileManager::ConnectGoogleDrive);
     connect(ui.actionrobocopy, &QAction::triggered, this, &OfflineFileManager::robocopyOpen);
+    connect(ui.actionArchiver, &QAction::triggered, this, &OfflineFileManager::archiverOpen);
 
     on_homeButton_clicked();
 }
@@ -494,6 +497,12 @@ void OfflineFileManager::robocopyOpen()
 {
     Robocopy* robocopy = new Robocopy(this, model);
     robocopy->show();
+}
+
+void OfflineFileManager::archiverOpen()
+{
+    Archiver* archiver = new Archiver();
+    archiver->show();
 }
 
 void OfflineFileManager::treeViewInit(QTreeView* tree, QFileInfoModel* model1)

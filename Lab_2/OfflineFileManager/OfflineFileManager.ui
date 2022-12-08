@@ -148,6 +148,7 @@ image: url(:/OfflineFileManager/res/icons/172546_search_icon.png);</string>
      <string>Utils</string>
     </property>
     <addaction name="actionrobocopy"/>
+    <addaction name="actionArchiver"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuConfiguration"/>
@@ -246,6 +247,11 @@ image: url(:/OfflineFileManager/res/icons/172546_search_icon.png);</string>
   <action name="actionClose_3">
    <property name="text">
     <string>Close</string>
+   </property>
+  </action>
+  <action name="actionArchiver">
+   <property name="text">
+    <string>Archiver</string>
    </property>
   </action>
  </widget>

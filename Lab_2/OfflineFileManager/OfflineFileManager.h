@@ -50,6 +50,7 @@ private slots:
     void search();
     void ConnectGoogleDrive();
     void robocopyOpen();
+    void archiverOpen();
 
 
 private:

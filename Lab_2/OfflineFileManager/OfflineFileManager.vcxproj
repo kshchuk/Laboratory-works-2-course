@@ -96,6 +96,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <QtRcc Include="OfflineFileManager.qrc" />
+    <QtUic Include="Archiver.ui" />
     <QtUic Include="Selector.ui" />
     <QtUic Include="OfflineFileManager.ui" />
     <QtMoc Include="OfflineFileManager.h" />
@@ -111,6 +112,7 @@
     <ClInclude Include="archiever\LibLzma.hpp" />
     <ClInclude Include="archiever\LibLzma2.hpp" />
     <ClInclude Include="archiever\unistd.h" />
+    <QtMoc Include="Archiver.h" />
     <ClInclude Include="BasicTraits.h" />
     <QtMoc Include="GoogleGateway.h" />
     <ClInclude Include="ModelSerializer.h" />
@@ -124,6 +126,7 @@
     <ClInclude Include="system_depend_functions.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Archiver.cpp" />
     <ClCompile Include="Selector.cpp" />
     <ClCompile Include="archiever\LibArchive.cpp" />
     <ClCompile Include="archiever\LibBZip2.cpp" />
