@@ -105,13 +105,6 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Selector.h" />
-    <QtMoc Include="archiever\libarchiveqt.h" />
-    <ClInclude Include="archiever\Global.hpp" />
-    <ClInclude Include="archiever\LibBZip2.hpp" />
-    <ClInclude Include="archiever\LibGZip.hpp" />
-    <ClInclude Include="archiever\LibLzma.hpp" />
-    <ClInclude Include="archiever\LibLzma2.hpp" />
-    <ClInclude Include="archiever\unistd.h" />
     <QtMoc Include="Archiver.h" />
     <ClInclude Include="BasicTraits.h" />
     <QtMoc Include="GoogleGateway.h" />
@@ -128,11 +121,6 @@
   <ItemGroup>
     <ClCompile Include="Archiver.cpp" />
     <ClCompile Include="Selector.cpp" />
-    <ClCompile Include="archiever\LibArchive.cpp" />
-    <ClCompile Include="archiever\LibBZip2.cpp" />
-    <ClCompile Include="archiever\LibGZip.cpp" />
-    <ClCompile Include="archiever\LibLzma.cpp" />
-    <ClCompile Include="archiever\LibLzma2.cpp" />
     <ClCompile Include="GoogleGateway.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyExplorer.cpp" />

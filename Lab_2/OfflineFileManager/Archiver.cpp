@@ -33,11 +33,11 @@ void Archiver::SelectArchive()
     QString fileName = QFileDialog::getOpenFileName(this, ("Open Archive"),
         "", ("Archive (*.lz *.uu *.lrz *.lzo *.lz4 *.gz *.bz2 *.lzma *.xz *.cpio *.shar *.tar *.tar.gz *.tar.grz *.tar.xz *.tar.lzo *.tar.lzma *.tar.lz *.tar.lrz *.tar.lz4 *.tar.Z *.iso *.zip *.ar *.xar *.7z)"));
 	
-	archive = new LibArchiveQt(fileName);
+	/*archive = new LibArchiveQt(fileName);
 	
 	foreach(ArchiveEntry * ae, archive->listArchive()) {
 		AddToList(ae->name);
-	}
+	}*/
 }
 
 void Archiver::ArchiveAll()
@@ -45,10 +45,10 @@ void Archiver::ArchiveAll()
 	QString fileName = QFileDialog::getSaveFileName(this, ("Archive Files"),
 		"", ("Archive (*.lz *.uu *.lrz *.lzo *.lz4 *.gz *.bz2 *.lzma *.xz *.cpio *.shar *.tar *.tar.gz *.tar.grz *.tar.xz *.tar.lzo *.tar.lzma *.tar.lz *.tar.lrz *.tar.lz4 *.tar.Z *.iso *.zip *.ar *.xar *.7z)"));
 	
-	archive = new LibArchiveQt(fileName);
+	/*archive = new LibArchiveQt(fileName);
 
 	archive->updateInputFiles(selected);
-	archive->createArchive();
+	archive->createArchive();*/
 }
 
 void Archiver::AddToList(QString path)

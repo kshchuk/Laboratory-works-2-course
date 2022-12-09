@@ -5,7 +5,7 @@
 
 #include "ui_Archiver.h"
 
-#include "archiever/libarchiveqt.h"
+//#include "archiever/libarchiveqt.h"
 
 
 class Archiver : public QMainWindow
@@ -31,7 +31,7 @@ private:
 	QStringList selected; // paths
 	QStringList listSelected;
 	QFileIconProvider icons;
-	LibArchiveQt* archive;
+	//LibArchiveQt* archive;
 
 	void UpdateSelected();
 };
