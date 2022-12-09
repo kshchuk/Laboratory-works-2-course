@@ -1,35 +1,5 @@
-/*
-	*
-	* Copyright 2018 Britanicus <marcusbritanicus@gmail.com>
-	*
-
-	*
-	* This program is free software: you can redistribute it and/or modify
-	* it under the terms of the GNU Lesser General Public License as published by
-	* the Free Software Foundation, either version 3 of the License, or
-	* (at your option) any later version.
-	*
-
-	*
-	* This program is distributed in the hope that it will be useful,
-	* but WITHOUT ANY WARRANTY; without even the implied warranty of
-	* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	* GNU Lesser General Public License for more details.
-	*
-
-	*
-	* You should have received a copy of the GNU Lesser General Public License
-	* along with this program.  If not, see <http://www.gnu.org/licenses/>.
-	*
-*/
-
 #include "Global.hpp"
 #include "libarchiveqt.h"
-
-//#include <fcntl.h>
-//#include <spawn.h>
-//<sys / stat.h>
-//<sys / types.h>
 
 #include "LibLzma.hpp"
 #include "LibLzma2.hpp"
@@ -44,18 +14,6 @@
 	#include "LibLZip.hpp"
 #endif
 
-//#if !defined(S_ISREG) && defined(S_IFMT) && defined(S_IFREG)
-//#define S_ISREG(m) (((m) & S_IFMT) == S_IFREG)
-//#endif
-
-#define _CRT_INTERNAL_NONSTDC_NAMES 1
-#include <sys/stat.h>
-#if !defined(S_ISREG) && defined(S_IFMT) && defined(S_IFREG)
-#define S_ISREG(m) (((m) & S_IFMT) == S_IFREG)
-#endif
-#if !defined(S_ISDIR) && defined(S_IFMT) && defined(S_IFDIR)
-#define S_ISDIR(m) (((m) & S_IFMT) == S_IFDIR)
-#endif
 
 // SystemWide Headers
 #include <errno.h>
