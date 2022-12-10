@@ -10,7 +10,7 @@ Archiver::Archiver(QWidget *parent)
 {
 	ui.setupUi(this);
 
-	this->setCentralWidget(ui.centralWidget);
+	this->setCentralWidget(ui.layoutWidget);
 	ui.listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
 
 	connect(ui.pushButton, &QPushButton::clicked, this, &Archiver::SelectFiles);
