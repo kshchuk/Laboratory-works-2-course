@@ -14,7 +14,7 @@
    <string>Archiver</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -39,13 +39,6 @@
           <widget class="QPushButton" name="pushButton_2">
            <property name="text">
             <string>Open Archive</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_4">
-           <property name="text">
-            <string>Unarchive Selected</string>
            </property>
           </widget>
          </item>
@@ -101,13 +94,6 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_3">
-           <property name="text">
-            <string>Archive Selected</string>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="QPushButton" name="pushButton_5">
            <property name="text">
             <string>Archive All</string>
@@ -135,10 +121,8 @@
      <string>File</string>
     </property>
     <addaction name="actionOpen_Archive"/>
-    <addaction name="actionUnarchive_Selected"/>
     <addaction name="actionUnarchive_All"/>
     <addaction name="actionOpen_Files"/>
-    <addaction name="actionArchive_Selected"/>
     <addaction name="actionArchive_All"/>
     <addaction name="actionClear"/>
    </widget>

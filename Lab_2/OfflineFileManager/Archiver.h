@@ -23,7 +23,7 @@ private slots:
 	void AddToList(QString path);
 	void ArchiveAll();
 	//void ArchiveSelected();
-	//void UnarchiveAll();
+	void UnarchiveAll();
 	//void UnarchiveSelected();
 
 private:
