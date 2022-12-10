@@ -30,5 +30,5 @@ Based on QT framework.
 
 # Lab3
 
-United with Lab2. Implemented mechanism of file compression using ZSTD compression algorithm. 
+United with Lab2. Implemented mechanism of file compression and decompression using ZSTD compression algorithm. 
 https://github.com/facebook/zstd
